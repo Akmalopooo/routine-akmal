@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Routine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f4f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 30px 15px 10px;
+            color: #333;
+            font-size: 1.8em;
+        }
+
+        #rot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: collapse;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 0.95em;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td sub {
+            font-size: 0.75em;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            th, td {
+                font-size: 0.85em;
+                padding: 10px 6px;
+            }
+
+            h1 {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Routine</h1>
+    <div id="rot">
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th>Day\Time</th>
+                    <th>6:05–6:55</th>
+                    <th>6:55–7:45</th>
+                    <th>7:45–8:35</th>
+                    <th>8:35–9:25</th>
+                    <th>9:45–10:35</th>
+                    <th>10:35–11:25</th>
+                </tr>
+                <tr>
+                    <td>Sunday</td>
+                    <td>Math <sub>AP</sub></td>
+                    <td>Chem <sub>KP</sub></td>
+                    <td>Comp <sub>LPP</sub></td>
+                    <td>Chem <sub>TP</sub></td>
+                    <td>Chem <sub>KBP</sub></td>
+                    <td>----</td>
+                </tr>
+                <tr>
+                    <td>Monday</td>
+                    <td>Nepali <sub>NSM</sub></td>
+                    <td>Physics <sub>SKS</sub></td>
+                    <td>Nepali <sub>URT</sub></td>
+                    <td>Math <sub>AP</sub></td>
+                    <td>Chem <sub>NK</sub></td>
+                    <td>----</td>
+                </tr>
+                <tr>
+                    <td>Tuesday</td>
+                    <td>Math <sub>YP</sub></td>
+                    <td>Nepali <sub>URT</sub></td>
+                    <td>Physics <sub>UKD</sub></td>
+                    <td>Comp <sub>LPP</sub></td>
+                    <td>Chem <sub>KBP</sub></td>
+                    <td>Physics <sub>HMA</sub></td>
+                </tr>
+                <tr>
+                    <td>Wednesday</td>
+                    <td>English <sub>RL</sub></td>
+                    <td>Math <sub>YP</sub></td>
+                    <td>Comp <sub>LPP</sub></td>
+                    <td>Math <sub>BPP</sub></td>
+                    <td>English <sub>CS</sub></td>
+                    <td>Chem <sub>SBS</sub></td>
+                </tr>
+                <tr>
+                    <td>Thursday</td>
+                    <td>Math <sub>AP</sub></td>
+                    <td>Physics <sub>SKS</sub></td>
+                    <td>Math <sub>YP</sub></td>
+                    <td>Comp <sub>LPP</sub></td>
+                    <td>Chem <sub>TP</sub></td>
+                    <td>English <sub>CS</sub></td>
+                </tr>
+                <tr>
+                    <td>Friday</td>
+                    <td>Physics <sub>HMA</sub></td>
+                    <td>Physics <sub>SKS</sub></td>
+                    <td>Nepali <sub>URT</sub></td>
+                    <td>Physics <sub>UKD</sub></td>
+                    <td>Chem/Physics Lab</td>
+                    <td>English <sub>CS</sub></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
