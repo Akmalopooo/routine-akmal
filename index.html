@@ -1,158 +1,221 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Routine</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f0f4f8;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="UTF-8">
+  <title>Routine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1e1e2f;
+      margin: 0;
+      padding: 0;
+      color: #ddd;
+      overflow-x: hidden;
+    }
 
-        h1 {
-            text-align: center;
-            margin: 30px 15px 10px;
-            color: #333;
-            font-size: 1.8em;
-        }
+    /* Loader screen */
+    #loader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(-45deg, #8e2de2, #6a11cb, #9d4edd, #7b2cbf); /* brighter purples */
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      color: #fff;
+      transition: opacity 1s ease;
+    }
 
-        #rot {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-        }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        .table-container {
-            width: 100%;
-            overflow-x: auto;
-        }
+    /* Animated AKMAL text */
+    .loader-text {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #fff;
+      margin-bottom: 20px;
+      animation: glow 2s infinite alternate;
+      letter-spacing: 4px;
+    }
 
-        table {
-            width: 100%;
-            min-width: 800px;
-            border-collapse: collapse;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-        }
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff, 0 0 10px #b5179e, 0 0 20px #7209b7; }
+      to   { text-shadow: 0 0 20px #fff, 0 0 30px #f72585, 0 0 40px #560bad; }
+    }
 
-        th, td {
-            padding: 12px 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-            font-size: 0.95em;
-        }
+    .loader-gif img {
+      width: 180px;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
 
-        th {
-            background-color: #4CAF50;
-            color: white;
-            position: sticky;
-            top: 0;
-        }
+    #main-content {
+      display: none;
+    }
 
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
+    h1 {
+      text-align: center;
+      margin: 30px 15px 20px;
+      color: #f5f5f5;
+    }
 
-        tr:hover {
-            background-color: #f1f1f1;
-        }
+    /* Table styling */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      padding: 15px;
+    }
 
-        td sub {
-            font-size: 0.75em;
-            color: #555;
-        }
+    table {
+      width: 100%;
+      min-width: 800px;
+      border-collapse: collapse;
+      background-color: rgba(42, 42, 61, 0.75);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
 
-        @media (max-width: 600px) {
-            th, td {
-                font-size: 0.85em;
-                padding: 10px 6px;
-            }
+    th, td {
+      padding: 14px 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.95em;
+      color: #e0e0e0;
+    }
 
-            h1 {
-                font-size: 1.4em;
-            }
-        }
-    </style>
+    th {
+      background: #3a3a4d;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    tr:nth-child(even) { background-color: rgba(36, 36, 54, 0.65); }
+    tr:nth-child(odd) { background-color: rgba(46, 46, 66, 0.65); }
+
+    /* Funny GIF after table */
+    .funny-gif {
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .funny-gif img {
+      max-width: 220px;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
-    <h1>Routine</h1>
-    <div id="rot">
-        <div class="table-container">
-            <table>
-                <tr>
-                    <th>Day\Time</th>
-                    <th>6:05–6:55</th>
-                    <th>6:55–7:45</th>
-                    <th>7:45–8:35</th>
-                    <th>8:35–9:25</th>
-                    <th>9:45–10:35</th>
-                    <th>10:35–11:25</th>
-                </tr>
-                <tr>
-                    <td>Sunday</td>
-                    <td>Math <sub>AP</sub></td>
-                    <td>Chem <sub>KP</sub></td>
-                    <td>Comp <sub>LPP</sub></td>
-                    <td>Chem <sub>TP</sub></td>
-                    <td>Chem <sub>KBP</sub></td>
-                    <td>----</td>
-                </tr>
-                <tr>
-                    <td>Monday</td>
-                    <td>Nepali <sub>NSM</sub></td>
-                    <td>Physics <sub>SKS</sub></td>
-                    <td>Nepali <sub>URT</sub></td>
-                    <td>Math <sub>AP</sub></td>
-                    <td>Chem <sub>NK</sub></td>
-                    <td>----</td>
-                </tr>
-                <tr>
-                    <td>Tuesday</td>
-                    <td>Math <sub>YP</sub></td>
-                    <td>Nepali <sub>URT</sub></td>
-                    <td>Physics <sub>UKD</sub></td>
-                    <td>Math <sub>BPP</sub></td>
-                    <td>Chem <sub>KBP</sub></td>
-                    <td>Physics <sub>HMA</sub></td>
-                </tr>
-                <tr>
-                    <td>Wednesday</td>
-                    <td>English <sub>RL</sub></td>
-                    <td>Math <sub>YP</sub></td>
-                    <td>Comp <sub>LPP</sub></td>
-                    <td>Physics <sub>UKD</sub></td>
-                    <td>English <sub>CS</sub></td>
-                    <td>Chem <sub>SBS</sub></td>
-                </tr>
-                <tr>
-                    <td>Thursday</td>
-                    <td>Math <sub>AP</sub></td>
-                    <td>Physics <sub>SKS</sub></td>
-                    <td>Math <sub>YP</sub></td>
-                    <td>Comp <sub>LPP</sub></td>
-                    <td>Chem <sub>TP</sub></td>
-                    <td>English <sub>CS</sub></td>
-                </tr>
-                <tr>
-                    <td>Friday</td>
-                    <td>Physics <sub>HMA</sub></td>
-                    <td>Physics <sub>SKS</sub></td>
-                    <td>Nepali <sub>URT</sub></td>
-                    <td>Comp <sub>LPP</sub></td>
-                    <td>Chem/Physics Lab</td>
-                    <td>English <sub>CS</sub></td>
-                </tr>
-            </table>
-        </div>
+  <!-- Loader Screen -->
+  <div id="loader">
+    <div class="loader-text">AKMAL</div>
+    <div class="loader-gif">
+      <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Jumping Cat">
     </div>
+    <h2>Loading your routine...</h2>
+  </div>
+
+  <!-- Main Content -->
+  <div id="main-content">
+    <h1>Routine</h1>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Day\Time</th>
+          <th>6:05–6:55</th>
+          <th>6:55–7:45</th>
+          <th>7:45–8:35</th>
+          <th>8:35–9:25</th>
+          <th>9:45–10:35</th>
+          <th>10:35–11:25</th>
+        </tr>
+        <tr>
+          <td>Sunday</td>
+          <td>Math <sub>AP</sub></td>
+          <td>Chem <sub>KP</sub></td>
+          <td>Comp <sub>LPP</sub></td>
+          <td>Chem <sub>TP</sub></td>
+          <td>Chem <sub>KBP</sub></td>
+          <td>----</td>
+        </tr>
+        <tr>
+          <td>Monday</td>
+          <td>Nepali <sub>NSM</sub></td>
+          <td>Physics <sub>SKS</sub></td>
+          <td>Nepali <sub>URT</sub></td>
+          <td>Math <sub>AP</sub></td>
+          <td>Chem <sub>NK</sub></td>
+          <td>----</td>
+        </tr>
+        <tr>
+          <td>Tuesday</td>
+          <td>Math <sub>YP</sub></td>
+          <td>Nepali <sub>URT</sub></td>
+          <td>Physics <sub>UKD</sub></td>
+          <td>Math <sub>BPP</sub></td>
+          <td>Chem <sub>KBP</sub></td>
+          <td>Physics <sub>HMA</sub></td>
+        </tr>
+        <tr>
+          <td>Wednesday</td>
+          <td>English <sub>RL</sub></td>
+          <td>Math <sub>YP</sub></td>
+          <td>Comp <sub>LPP</sub></td>
+          <td>Physics <sub>UKD</sub></td>
+          <td>English <sub>CS</sub></td>
+          <td>Chem <sub>SBS</sub></td>
+        </tr>
+        <tr>
+          <td>Thursday</td>
+          <td>Math <sub>AP</sub></td>
+          <td>Physics <sub>SKS</sub></td>
+          <td>Math <sub>YP</sub></td>
+          <td>Comp <sub>LPP</sub></td>
+          <td>Chem <sub>TP</sub></td>
+          <td>English <sub>CS</sub></td>
+        </tr>
+        <tr>
+          <td>Friday</td>
+          <td>Physics <sub>HMA</sub></td>
+          <td>Physics <sub>SKS</sub></td>
+          <td>Nepali <sub>URT</sub></td>
+          <td>Comp <sub>LPP</sub></td>
+          <td>Chem/Physics Lab</td>
+          <td>English <sub>CS</sub></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Funny Dancing Cat GIF -->
+    <div class="funny-gif">
+      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Dancing Cat">
+    </div>
+  </div>
+
+  <!-- Meow sound -->
+  <audio id="meow-sound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
+
+  <script>
+    // Loader hides after 8s and shows content
+    setTimeout(() => {
+      document.getElementById("loader").style.opacity = "0";
+      setTimeout(() => {
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("main-content").style.display = "block";
+        document.getElementById("meow-sound").play();
+      }, 1000); // fade-out
+    }, 8000); // 8 seconds
+  </script>
 </body>
 </html>
-
-
