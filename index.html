@@ -5,116 +5,162 @@
   <title>Routine</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #1e1e2f;
-      margin: 0;
-      padding: 0;
-      color: #ddd;
-      overflow-x: hidden;
-    }
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #1e1e2f;
+    margin: 0;
+    padding: 0;
+    color: #ddd;
+    overflow-x: hidden;
+  }
 
-    /* Loader screen */
-    #loader {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(-45deg, #8e2de2, #6a11cb, #9d4edd, #7b2cbf); /* brighter purples */
-      background-size: 400% 400%;
-      animation: gradientBG 10s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 9999;
-      color: #fff;
-      transition: opacity 1s ease;
-    }
+  /* Loader screen */
+  #loader {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(-45deg, #4b0082, #2e0854, #5d3fd3, #4c1d95);
+    background-size: 400% 400%;
+    animation: gradientBG 10s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 9999;
+    color: #fff;
+    transition: opacity 1s ease;
+  }
 
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
 
-    /* Animated AKMAL text */
-    .loader-text {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 20px;
-      animation: glow 2s infinite alternate;
-      letter-spacing: 4px;
-    }
+  .loader-text {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 20px;
+    text-shadow: 0 0 6px #a855f7, 0 0 12px #6d28d9;
+    animation: bounce 2s infinite;
+    letter-spacing: 4px;
+  }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #fff, 0 0 10px #b5179e, 0 0 20px #7209b7; }
-      to   { text-shadow: 0 0 20px #fff, 0 0 30px #f72585, 0 0 40px #560bad; }
-    }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
 
-    .loader-gif img {
-      width: 180px;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
+  .loader-gif img {
+    width: 160px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
 
-    #main-content {
-      display: none;
-    }
+  .final-cat {
+    display: none;
+    width: 200px;
+    margin: 20px auto 0;
+    border-radius: 10px;
+  }
 
-    h1 {
-      text-align: center;
-      margin: 30px 15px 20px;
-      color: #f5f5f5;
-    }
+  #main-content {
+    display: none;
+    padding-bottom: 50px;
+    position: relative;
+    z-index: 1;
+  }
 
-    /* Table styling */
-    .table-container {
-      width: 100%;
-      overflow-x: auto;
-      padding: 15px;
-    }
+  h1 {
+    text-align: center;
+    margin: 30px 15px 20px;
+    color: #f5f5f5;
+  }
 
-    table {
-      width: 100%;
-      min-width: 800px;
-      border-collapse: collapse;
-      background-color: rgba(42, 42, 61, 0.75);
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-    }
+  /* Table styling */
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 15px;
+    position: relative;
+  }
 
-    th, td {
-      padding: 14px 12px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-size: 0.95em;
-      color: #e0e0e0;
-    }
+  table {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    background-color: rgba(42, 42, 61, 0.85);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    position: relative;
+  }
 
-    th {
-      background: #3a3a4d;
-      color: #fff;
-      font-weight: 600;
-    }
+  th, td {
+    padding: 14px 12px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 0.95em;
+    color: #e0e0e0;
+  }
 
-    tr:nth-child(even) { background-color: rgba(36, 36, 54, 0.65); }
-    tr:nth-child(odd) { background-color: rgba(46, 46, 66, 0.65); }
+  th {
+    background: #2e0854; /* darker purple for time header */
+    color: #fff;
+    font-weight: 600;
+  }
 
-    /* Funny GIF after table */
-    .funny-gif {
-      text-align: center;
-      margin: 40px 0;
-    }
+  td:first-child {
+    background: rgba(42, 42, 61, 0.85); /* same as subjects now */
+    font-weight: 600;
+    color: #e0e0e0;
+  }
 
-    .funny-gif img {
-      max-width: 220px;
-      border-radius: 8px;
-    }
-  </style>
+  tr:nth-child(even) { background-color: rgba(36, 36, 54, 0.65); }
+  tr:nth-child(odd) { background-color: rgba(46, 46, 66, 0.65); }
+
+  /* Watermark */
+  .table-container::after {
+    content: "AKMAL";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    font-size: 8rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Floating L2s */
+  .floating {
+    position: fixed;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.1);
+    animation: float 12s infinite linear;
+    z-index: 0;
+  }
+
+  .l2-one { top: 20%; left: 10%; animation-delay: 0s; }
+  .l2-two { bottom: 15%; right: 15%; animation-delay: 5s; }
+
+  @keyframes float {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); }
+    50% { transform: translateY(-40px) translateX(20px) rotate(15deg); }
+    100% { transform: translateY(0) translateX(0) rotate(0deg); }
+  }
+
+  @media (max-width: 768px) {
+    .loader-text { font-size: 2.2rem; }
+    .loader-gif img, .final-cat { width: 140px; }
+    table { min-width: 600px; font-size: 0.85em; }
+    .table-container::after { font-size: 5rem; }
+  }
+</style>
+
 </head>
 <body>
   <!-- Loader Screen -->
@@ -124,6 +170,7 @@
       <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Jumping Cat">
     </div>
     <h2>Loading your routine...</h2>
+    <img id="final-cat" class="final-cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cat Tongue Out">
   </div>
 
   <!-- Main Content -->
@@ -196,26 +243,27 @@
         </tr>
       </table>
     </div>
-
-    <!-- Funny Dancing Cat GIF -->
-    <div class="funny-gif">
-      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="Dancing Cat">
-    </div>
   </div>
 
   <!-- Meow sound -->
   <audio id="meow-sound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
 
   <script>
-    // Loader hides after 8s and shows content
+    // After 8s show cat tongue
+    setTimeout(() => {
+      document.querySelector(".loader-gif").style.display = "none";
+      document.getElementById("final-cat").style.display = "block";
+    }, 8000);
+
+    // After 10s hide loader and show routine
     setTimeout(() => {
       document.getElementById("loader").style.opacity = "0";
       setTimeout(() => {
         document.getElementById("loader").style.display = "none";
         document.getElementById("main-content").style.display = "block";
         document.getElementById("meow-sound").play();
-      }, 1000); // fade-out
-    }, 8000); // 8 seconds
+      }, 1000);
+    }, 10000);
   </script>
 </body>
 </html>
