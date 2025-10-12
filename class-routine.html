@@ -2,34 +2,39 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Cycle Test Routine</title>
+<title>Class Routine</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
 body{font-family:'Poppins',sans-serif;margin:0;background:#1e1e2f;color:#ddd;text-align:center;}
-body::before{content:"AKMAL";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:8rem;color:rgba(255,255,255,0.15);pointer-events:none;z-index:0;}
-h1{margin:30px 0;color:#fff;}
-.btn-back{display:inline-block;margin:15px;padding:10px 20px;background:#1d4ed8;color:#fff;border-radius:8px;text-decoration:none;}
-.btn-back:hover{background:#2563eb;}
-.table-container{width:95%;max-width:600px;margin:20px auto;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;background:rgba(42,42,61,0.85);border-radius:10px;overflow:hidden;}
-th,td{padding:12px;text-align:center;border:1px solid rgba(255,255,255,0.08);}
-th{background:#2e0854;font-weight:600;}
+h1{margin:20px 0;}
+table{margin:0 auto 50px;border-collapse:collapse;width:90%;max-width:1000px;}
+th,td{padding:12px;border:1px solid rgba(255,255,255,0.1);color:#fff;}
+th{background:#2e0854;}
 tr:nth-child(even){background:rgba(36,36,54,0.65);}
 tr:nth-child(odd){background:rgba(46,46,66,0.65);}
+a{color:#1d4ed8;text-decoration:none;margin:15px;display:inline-block;}
+a:hover{color:#2563eb;}
 </style>
 </head>
 <body>
-<h1>Cycle Test Routine</h1>
-<a class="btn-back" href="index.html">← Back</a>
 
-<div class="table-container">
-  <table>
-    <tr><th>Date</th><th>Day</th><th>Subject</th></tr>
-    <tr><td>12-Oct</td><td>Sunday</td><td>Math / Physics</td></tr>
-    <tr><td>13-Oct</td><td>Monday</td><td>English / Chemistry</td></tr>
-    <tr><td>14-Oct</td><td>Tuesday</td><td>Computer / Logic</td></tr>
-  </table>
-</div>
+<script>
+if(sessionStorage.getItem('accessGranted')!=='true'){ window.location.href='index.html'; }
+</script>
+
+<h1>Class Routine</h1>
+<a href="index.html">← Back</a>
+
+<table>
+<tr><th>Day</th><th>6:05–6:55</th><th>6:55–7:45</th><th>7:45–8:35</th><th>8:35–9:25</th><th>9:45–10:35</th><th>10:35–11:25</th></tr>
+<tr><td>Sunday</td><td>Math</td><td>Chem</td><td>Comp</td><td>Chem</td><td>Chem</td><td>----</td></tr>
+<tr><td>Monday</td><td>Nepali</td><td>Physics</td><td>Nepali</td><td>Math</td><td>Chem</td><td>----</td></tr>
+<tr><td>Tuesday</td><td>Math</td><td>Nepali</td><td>Physics</td><td>Math</td><td>Chem</td><td>Physics</td></tr>
+<tr><td>Wednesday</td><td>English</td><td>Math</td><td>Comp</td><td>Physics</td><td>English</td><td>Chem</td></tr>
+<tr><td>Thursday</td><td>Math</td><td>Physics</td><td>Math</td><td>Comp</td><td>Chem</td><td>English</td></tr>
+<tr><td>Friday</td><td>Physics</td><td>Physics</td><td>Nepali</td><td>Comp</td><td>Chem/Physics Lab</td><td>English</td></tr>
+</table>
+
 </body>
 </html>
