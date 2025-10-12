@@ -84,6 +84,24 @@
 
     .hidden { display: none; }
 
+    .subject-btns {
+      margin: 15px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .subject-btns button {
+      flex: 1 1 120px;
+      max-width: 150px;
+      background-color: #1d4ed8;
+    }
+
+    .subject-btns button:hover {
+      background-color: #2563eb;
+    }
+
     /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
       th, td { 
@@ -91,26 +109,18 @@
         font-size: 0.85em; 
       }
 
-      table { 
-        font-size: 0.85em; 
-      }
+      table { font-size: 0.85em; }
 
-      .btn-container {
+      .btn-container, .subject-btns {
         flex-direction: column;
         gap: 10px;
       }
 
-      button {
-        flex: 1 1 100%;
-        max-width: unset;
-      }
+      button { flex: 1 1 100%; max-width: unset; }
     }
 
     @media (max-width: 480px) {
-      th, td {
-        padding: 8px 4px;
-        font-size: 0.75em;
-      }
+      th, td { padding: 8px 4px; font-size: 0.75em; }
     }
   </style>
 </head>
@@ -120,6 +130,7 @@
   <div class="btn-container">
     <button id="classBtn">Class Routine</button>
     <button id="cycleBtn">Cycle Test Routine</button>
+    <button id="syllabusBtn">Syllabus/Grade</button>
   </div>
 
   <!-- Class Routine Table -->
@@ -208,20 +219,103 @@
     </table>
   </div>
 
+  <!-- Syllabus / Grade Section -->
+  <div id="syllabusSection" class="hidden">
+    <div class="subject-btns">
+      <button id="physicsBtn">Physics</button>
+      <button id="chemistryBtn">Chemistry</button>
+      <button id="computerBtn">Computer</button>
+    </div>
+
+    <div class="table-container hidden" id="physicsTable">
+      <table>
+        <tr><th>Physics Topics</th></tr>
+        <tr><td>1. Vectors</td></tr>
+        <tr><td>2. Reflection</td></tr>
+        <tr><td>3. Thermal Expansion</td></tr>
+        <tr><td>4. Thermal Expansion (continued)</td></tr>
+      </table>
+    </div>
+
+    <div class="table-container hidden" id="chemistryTable">
+      <table>
+        <tr><th>Chemistry Topics</th></tr>
+        <tr><td>1. Stoichiometry</td></tr>
+        <tr><td>2. Chemical Equilibrium</td></tr>
+        <tr><td>3. Metallurgy</td></tr>
+        <tr><td>4. Organic Chemistry</td></tr>
+      </table>
+    </div>
+
+<div class="table-container hidden" id="computerTable">
+  <table>
+    <tr><th>Computer Topics</th></tr>
+    <tr><td>1. Multimedia</td></tr>
+    <tr><td>2. Logic of Programming</td></tr>
+    <tr><td>3. Concept of Programming</td></tr>
+    <tr><td>4. Flowchart</td></tr>
+  </table>
+</div>
+
+  </div>
+
   <script>
     const classBtn = document.getElementById('classBtn');
     const cycleBtn = document.getElementById('cycleBtn');
+    const syllabusBtn = document.getElementById('syllabusBtn');
+
     const classRoutine = document.getElementById('classRoutine');
     const cycleRoutine = document.getElementById('cycleRoutine');
+    const syllabusSection = document.getElementById('syllabusSection');
 
+    const physicsBtn = document.getElementById('physicsBtn');
+    const chemistryBtn = document.getElementById('chemistryBtn');
+    const computerBtn = document.getElementById('computerBtn');
+
+    const physicsTable = document.getElementById('physicsTable');
+    const chemistryTable = document.getElementById('chemistryTable');
+    const computerTable = document.getElementById('computerTable');
+
+    // Main buttons
     classBtn.addEventListener('click', () => {
       classRoutine.classList.remove('hidden');
       cycleRoutine.classList.add('hidden');
+      syllabusSection.classList.add('hidden');
     });
 
     cycleBtn.addEventListener('click', () => {
       classRoutine.classList.add('hidden');
       cycleRoutine.classList.remove('hidden');
+      syllabusSection.classList.add('hidden');
+    });
+
+    syllabusBtn.addEventListener('click', () => {
+      classRoutine.classList.add('hidden');
+      cycleRoutine.classList.add('hidden');
+      syllabusSection.classList.remove('hidden');
+      // Hide all subject tables initially
+      physicsTable.classList.add('hidden');
+      chemistryTable.classList.add('hidden');
+      computerTable.classList.add('hidden');
+    });
+
+    // Subject buttons
+    physicsBtn.addEventListener('click', () => {
+      physicsTable.classList.remove('hidden');
+      chemistryTable.classList.add('hidden');
+      computerTable.classList.add('hidden');
+    });
+
+    chemistryBtn.addEventListener('click', () => {
+      chemistryTable.classList.remove('hidden');
+      physicsTable.classList.add('hidden');
+      computerTable.classList.add('hidden');
+    });
+
+    computerBtn.addEventListener('click', () => {
+      computerTable.classList.remove('hidden');
+      physicsTable.classList.add('hidden');
+      chemistryTable.classList.add('hidden');
     });
   </script>
 
