@@ -136,21 +136,30 @@ const correctPassword = '1920';
 const passwordScreen = document.getElementById('passwordScreen');
 const mainContent = document.getElementById('mainContent');
 const errorMsg = document.getElementById('errorMsg');
+const passwordInput = document.getElementById('passwordInput');
 
+// Check password function
 function checkPassword() {
-  const userPass = document.getElementById('passwordInput').value;
+  const userPass = passwordInput.value.trim();
   if(userPass === correctPassword){
     sessionStorage.setItem('accessGranted','true'); // access flag
-    showContent();
+    passwordScreen.classList.add('hidden');
+    mainContent.classList.remove('hidden');
+    errorMsg.textContent = '';
   } else {
     errorMsg.textContent = "Incorrect Password!";
+    passwordInput.value = '';
+    passwordInput.focus();
   }
 }
 
-function showContent() {
-  passwordScreen.classList.add('hidden');
-  mainContent.classList.remove('hidden');
-}
+// Allow Enter key to submit
+passwordInput.addEventListener('keydown', function(e){
+  if(e.key === 'Enter'){
+    e.preventDefault();
+    checkPassword();
+  }
+});
 </script>
 
 </body>
