@@ -13,11 +13,29 @@
       padding: 0;
       color: #ddd;
       text-align: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Watermark */
+    body::before {
+      content: "AKMAL";
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-20deg);
+      font-size: 8rem;
+      font-weight: bold;
+      color: rgba(255,255,255,0.05);
+      pointer-events: none;
+      z-index: 0;
     }
 
     h1 {
       margin-top: 30px;
       color: #fff;
+      position: relative;
+      z-index: 1;
     }
 
     .btn-container {
@@ -26,6 +44,8 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 15px;
+      position: relative;
+      z-index: 1;
     }
 
     button {
@@ -50,6 +70,8 @@
       max-width: 1000px;
       margin: 0 auto 50px;
       overflow-x: auto;
+      position: relative;
+      z-index: 1;
     }
 
     table {
@@ -90,6 +112,8 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
+      position: relative;
+      z-index: 1;
     }
 
     .subject-btns button {
@@ -214,110 +238,12 @@
       <tr><td>2082/06/28</td><td>Tue</td><td>Mathematics</td></tr>
       <tr><td>2082/06/29</td><td>Wed</td><td>Physics</td></tr>
       <tr><td>2082/06/30</td><td>Thu</td><td>Chemistry</td></tr>
-      <tr><td>2082/07/01</td><td>Fri</td><td>Nepali</td></tr>
-      <tr><td>2082/07/01</td><td>Fri</td><td>English</td></tr>
+      <tr><td>2082/07/01</td><td>Sat</td><td>Nepali</td></tr>
+      <tr><td>2082/07/01</td><td>Sun</td><td>English</td></tr>
     </table>
   </div>
 
   <!-- Syllabus / Grade Section -->
   <div id="syllabusSection" class="hidden">
     <div class="subject-btns">
-      <button id="physicsBtn">Physics</button>
-      <button id="chemistryBtn">Chemistry</button>
-      <button id="computerBtn">Computer</button>
-    </div>
-
-    <div class="table-container hidden" id="physicsTable">
-      <table>
-        <tr><th>Physics Topics</th></tr>
-        <tr><td>1. Vectors</td></tr>
-        <tr><td>2. Reflection</td></tr>
-        <tr><td>3. Thermal Expansion</td></tr>
-        <tr><td>4. Thermal Expansion (continued)</td></tr>
-      </table>
-    </div>
-
-    <div class="table-container hidden" id="chemistryTable">
-      <table>
-        <tr><th>Chemistry Topics</th></tr>
-        <tr><td>1. Stoichiometry</td></tr>
-        <tr><td>2. Chemical Equilibrium</td></tr>
-        <tr><td>3. Metallurgy</td></tr>
-        <tr><td>4. Organic Chemistry</td></tr>
-      </table>
-    </div>
-
-<div class="table-container hidden" id="computerTable">
-  <table>
-    <tr><th>Computer Topics</th></tr>
-    <tr><td>1. Multimedia</td></tr>
-    <tr><td>2. Logic of Programming</td></tr>
-    <tr><td>3. Concept of Programming</td></tr>
-    <tr><td>4. Flowchart</td></tr>
-  </table>
-</div>
-
-  </div>
-
-  <script>
-    const classBtn = document.getElementById('classBtn');
-    const cycleBtn = document.getElementById('cycleBtn');
-    const syllabusBtn = document.getElementById('syllabusBtn');
-
-    const classRoutine = document.getElementById('classRoutine');
-    const cycleRoutine = document.getElementById('cycleRoutine');
-    const syllabusSection = document.getElementById('syllabusSection');
-
-    const physicsBtn = document.getElementById('physicsBtn');
-    const chemistryBtn = document.getElementById('chemistryBtn');
-    const computerBtn = document.getElementById('computerBtn');
-
-    const physicsTable = document.getElementById('physicsTable');
-    const chemistryTable = document.getElementById('chemistryTable');
-    const computerTable = document.getElementById('computerTable');
-
-    // Main buttons
-    classBtn.addEventListener('click', () => {
-      classRoutine.classList.remove('hidden');
-      cycleRoutine.classList.add('hidden');
-      syllabusSection.classList.add('hidden');
-    });
-
-    cycleBtn.addEventListener('click', () => {
-      classRoutine.classList.add('hidden');
-      cycleRoutine.classList.remove('hidden');
-      syllabusSection.classList.add('hidden');
-    });
-
-    syllabusBtn.addEventListener('click', () => {
-      classRoutine.classList.add('hidden');
-      cycleRoutine.classList.add('hidden');
-      syllabusSection.classList.remove('hidden');
-      // Hide all subject tables initially
-      physicsTable.classList.add('hidden');
-      chemistryTable.classList.add('hidden');
-      computerTable.classList.add('hidden');
-    });
-
-    // Subject buttons
-    physicsBtn.addEventListener('click', () => {
-      physicsTable.classList.remove('hidden');
-      chemistryTable.classList.add('hidden');
-      computerTable.classList.add('hidden');
-    });
-
-    chemistryBtn.addEventListener('click', () => {
-      chemistryTable.classList.remove('hidden');
-      physicsTable.classList.add('hidden');
-      computerTable.classList.add('hidden');
-    });
-
-    computerBtn.addEventListener('click', () => {
-      computerTable.classList.remove('hidden');
-      physicsTable.classList.add('hidden');
-      chemistryTable.classList.add('hidden');
-    });
-  </script>
-
-</body>
-</html>
+      <button id="physicsBtn">Physics</button
