@@ -6,112 +6,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-body{font-family:'Poppins',sans-serif;margin:0;padding:0;background:#1e1e2f;color:#ddd;text-align:center;overflow-x:hidden;}
-body::before{content:"AKMAL";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:8rem;color:rgba(255,255,255,0.15);pointer-events:none;z-index:0;}
-h1{margin:30px 0 10px;color:#fff;}
-.btn-container{margin:20px 0;display:flex;justify-content:center;flex-wrap:wrap;gap:15px;}
-button{background:#4c1d95;color:#fff;border:none;padding:12px 25px;font-size:1rem;cursor:pointer;border-radius:8px;transition:0.3s;flex:1 1 150px;max-width:200px;}
-button:hover{background:#6d28d9;}
-.routine-card{background:rgba(42,42,61,0.85);padding:15px;border-radius:10px;max-width:400px;margin:15px auto;}
-.routine-card h2{margin-bottom:10px;color:#fff;}
-.period-slot{display:flex;justify-content:space-between;margin:3px 0;font-size:0.9rem;}
-.flying{position:absolute;font-size:0.8rem;color:rgba(255,255,255,0.3);z-index:2;pointer-events:none;}
-@media(max-width:768px){.routine-card{width:90%;}.flying{font-size:0.6rem;}}
-@media(max-width:480px){.flying{font-size:0.5rem;}}
+body {font-family:'Poppins',sans-serif; margin:0; background:#1e1e2f; color:#ddd; text-align:center; overflow-x:hidden;}
+body::before {content:"AKMAL"; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) rotate(-20deg); font-size:8rem; color:rgba(255,255,255,0.15); pointer-events:none; z-index:0;}
+h1{margin:30px 0;color:#fff;}
+.btn-container{display:flex; flex-wrap:wrap; justify-content:center; gap:15px; margin:20px 0;}
+.btn-container button{background:#4c1d95;color:#fff;border:none;padding:12px 25px;font-size:1rem;cursor:pointer;border-radius:8px;transition:0.3s;flex:1 1 150px; max-width:200px;}
+.btn-container button:hover{background:#6d28d9;}
+.hidden{display:none;}
+#passwordScreen{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:10;}
+#passwordScreen input{padding:10px 15px;font-size:1rem;border-radius:5px;border:none;margin-bottom:10px;}
+#passwordScreen button{padding:10px 20px;font-size:1rem;border:none;border-radius:5px;background:#1d4ed8;color:#fff;cursor:pointer;transition:0.3s;}
+#passwordScreen button:hover{background:#2563eb;}
+.errorMsg{color:#ff5555;margin-top:10px;}
 </style>
 </head>
 <body>
 
-<h1>L2</h1>
-
-<div class="btn-container">
-  <button onclick="location.href='class-routine.html'">Full Routine</button>
-  <button onclick="location.href='cycle-test.html'">Cycle Test Routine</button>
-  <button onclick="location.href='syllabus.html'">Syllabus / Grade</button>
+<div id="passwordScreen">
+  <h1>Enter Password</h1>
+  <input type="password" id="passwordInput" placeholder="Password">
+  <button onclick="checkPassword()">Submit</button>
+  <div class="errorMsg" id="errorMsg"></div>
 </div>
 
-<!-- Today/Tomorrow Routine Preview -->
-<div class="routine-card" id="todayRoutine"></div>
-
-<!-- Tomorrow's Cycle Test -->
-<div class="routine-card" id="tomorrowTest"></div>
-
-<!-- Flying L2 -->
-<div class="flying" id="fly1">L2</div>
-<div class="flying" id="fly2">L2</div>
-<div class="flying" id="fly3">L2</div>
+<div id="mainContent" class="hidden">
+  <h1>L2</h1>
+  <div class="btn-container">
+    <button onclick="location.href='class-routine.html'">Class Routine</button>
+    <button onclick="location.href='cycle-test.html'">Cycle Test Routine</button>
+    <button onclick="location.href='syllabus.html'">Syllabus / Grade</button>
+  </div>
+</div>
 
 <script>
-// Class Routine Data
-const routineData = {
-  'Sunday':[["6:05–6:55","Math AP"], ["6:55–7:45","Chem KP"], ["7:45–8:35","Comp LPP"], ["8:35–9:25","Chem TP"], ["9:45–10:35","Chem KBP"], ["10:35–11:25","----"]],
-  'Monday':[["6:05–6:55","Nepali NSM"], ["6:55–7:45","Physics SKS"], ["7:45–8:35","Nepali URT"], ["8:35–9:25","Math AP"], ["9:45–10:35","Chem NK"], ["10:35–11:25","----"]],
-  'Tuesday':[["6:05–6:55","Math YP"], ["6:55–7:45","Nepali URT"], ["7:45–8:35","Physics UKD"], ["8:35–9:25","Math BPP"], ["9:45–10:35","Chem KBP"], ["10:35–11:25","Physics HMA"]],
-  'Wednesday':[["6:05–6:55","English RL"], ["6:55–7:45","Math YP"], ["7:45–8:35","Comp LPP"], ["8:35–9:25","Physics UKD"], ["9:45–10:35","English CS"], ["10:35–11:25","Chem SBS"]],
-  'Thursday':[["6:05–6:55","Math AP"], ["6:55–7:45","Physics SKS"], ["7:45–8:35","Math YP"], ["8:35–9:25","Comp LPP"], ["9:45–10:35","Chem TP"], ["10:35–11:25","English CS"]],
-  'Friday':[["6:05–6:55","Physics HMA"], ["6:55–7:45","Physics SKS"], ["7:45–8:35","Nepali URT"], ["8:35–9:25","Comp LPP"], ["9:45–10:35","Chem/Physics Lab"], ["10:35–11:25","English CS"]],
-  'Saturday':[["----","----"]]
-};
-const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const correctPassword = '1920';
+const passwordScreen = document.getElementById('passwordScreen');
+const mainContent = document.getElementById('mainContent');
+const errorMsg = document.getElementById('errorMsg');
 
-// Cycle Test Data
-const cycleTest = [
-  {date:'12-Oct', day:'Sunday', subject:'Math / Physics'},
-  {date:'13-Oct', day:'Monday', subject:'English / Chemistry'},
-  {date:'14-Oct', day:'Tuesday', subject:'Computer / Logic'}
-];
-
-// Function to show today's/tomorrow's routine
-function showRoutine(){
-  const now = new Date();
-  const utcOffset = now.getTimezoneOffset();
-  const nepalOffset = 5*60 + 45;
-  let totalMinutes = now.getHours()*60 + now.getMinutes() + (nepalOffset+utcOffset);
-  let hour = Math.floor(totalMinutes/60);
-  if(hour>=24) hour-=24;
-
-  let dayIndex = now.getDay();
-  let routineLabel = "Today's Routine";
-  if(hour>=10){ // After 10am, show next day
-    dayIndex = (dayIndex+1)%7;
-    routineLabel = "Tomorrow's Routine";
+function checkPassword() {
+  const userPass = document.getElementById('passwordInput').value;
+  if(userPass === correctPassword){
+    sessionStorage.setItem('accessGranted','true'); // flag for other pages
+    showContent();
+  } else {
+    errorMsg.textContent = "Incorrect Password!";
   }
-
-  const card = document.getElementById('todayRoutine');
-  card.innerHTML = `<h2>${routineLabel}</h2>` +
-    routineData[dayNames[dayIndex]].map(slot => 
-      `<div class="period-slot"><span>${slot[0]}</span><span>${slot[1]}</span></div>`
-    ).join('');
-
-  // Tomorrow's cycle test
-  const testDayIndex = (dayIndex+1)%cycleTest.length;
-  const test = cycleTest[testDayIndex];
-  const testCard = document.getElementById('tomorrowTest');
-  testCard.innerHTML = `<h2>Tomorrow's Cycle Test</h2>
-                        <div class="period-slot"><span>${test.date}</span><span>${test.subject}</span></div>`;
 }
 
-showRoutine();
-
-// Flying L2 animation
-const flies = [document.getElementById('fly1'),document.getElementById('fly2'),document.getElementById('fly3')];
-flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});
-setInterval(()=>{flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});},2000);
-
-// Click effect
-document.body.addEventListener('click', e=>{
-  const el=document.createElement('div');
-  el.className='click-effect';
-  el.style.top=e.clientY+'px';
-  el.style.left=e.clientX+'px';
-  el.style.width='20px'; el.style.height='20px'; el.style.background='#fff'; el.style.borderRadius='50%';
-  el.style.position='absolute'; el.style.transform='translate(-50%,-50%)'; el.style.pointerEvents='none';
-  el.style.zIndex='3'; el.style.animation='fadeOut 0.5s forwards';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),500);
-});
+function showContent() {
+  passwordScreen.classList.add('hidden');
+  mainContent.classList.remove('hidden');
+}
 </script>
-<style>@keyframes fadeOut{to{opacity:0;transform:translate(-50%,-50%) scale(2);}}</style>
 
 </body>
 </html>
