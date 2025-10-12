@@ -126,13 +126,14 @@
       background-color: #2563eb;
     }
 
-    /* Flying L2 */
+    /* Flying L2 - Modified: Smaller size, lower opacity, slower movement */
     .flying {
       position: absolute;
-      font-size: 2rem;
-      color: #fff;
+      font-size: 0.8rem; /* Reduced from 2rem */
+      color: rgba(255, 255, 255, 0.3); /* Added low opacity */
       z-index: 2;
       pointer-events: none;
+      /* Slower initial speed for less chaos */
     }
 
     /* Click effect */
@@ -152,7 +153,7 @@
       to { opacity: 0; transform: translate(-50%, -50%) scale(2); }
     }
 
-    /* MOBILE RESPONSIVE */
+    /* MOBILE RESPONSIVE - Enhanced for flying elements */
     @media (max-width: 768px) {
       th, td { 
         padding: 10px 6px; 
@@ -167,10 +168,37 @@
       }
 
       button { flex: 1 1 100%; max-width: unset; }
+
+      /* Flying L2 adjustments for mobile: Even smaller, lower opacity, fewer/slower */
+      .flying {
+        font-size: 0.6rem; /* Further reduced for mobile */
+        color: rgba(255, 255, 255, 0.15); /* Lower opacity on mobile to reduce distraction */
+      }
+
+      /* Reduce number of flying elements on mobile by hiding one */
+      #fly3 {
+        display: none;
+      }
+
+      /* Watermark smaller on mobile to avoid overlap */
+      body::before {
+        font-size: 4rem; /* Halved size on mobile */
+        color: rgba(255,255,255,0.1); /* Less visible on small screens */
+      }
     }
 
     @media (max-width: 480px) {
       th, td { padding: 8px 4px; font-size: 0.75em; }
+
+      /* Even more subtle on very small screens */
+      .flying {
+        font-size: 0.5rem;
+        color: rgba(255, 255, 255, 0.1);
+      }
+
+      body::before {
+        font-size: 3rem;
+      }
     }
   </style>
 </head>
@@ -369,7 +397,7 @@
       chemistryTable.classList.add('hidden');
     });
 
-    // Flying L2 animation
+    // Flying L2 animation - Modified: Slower speed (reduced dx/dy range) for better mobile feel
     const flies = [
       document.getElementById('fly1'),
       document.getElementById('fly2'),
@@ -379,8 +407,8 @@
     flies.forEach(fly => {
       let x = Math.random() * window.innerWidth;
       let y = Math.random() * window.innerHeight;
-      let dx = (Math.random() - 0.5) * 2;
-      let dy = (Math.random() - 0.5) * 2;
+      let dx = (Math.random() - 0.5) * 0.8; /* Reduced speed from *2 to *0.8 */
+      let dy = (Math.random() - 0.5) * 0.8; /* Slower movement, less chaotic on mobile */
 
       function move() {
         x += dx;
