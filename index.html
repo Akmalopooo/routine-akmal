@@ -26,7 +26,7 @@
       transform: translate(-50%, -50%) rotate(-20deg);
       font-size: 8rem;
       font-weight: bold;
-      color: rgba(255,255,255,0.2); /* more visible */
+      color: rgba(255,255,255,0.2);
       pointer-events: none;
       z-index: 0;
     }
@@ -34,6 +34,14 @@
     h1 {
       margin-top: 30px;
       color: #fff;
+      position: relative;
+      z-index: 1;
+    }
+
+    h2 {
+      color: #fff;
+      margin: 20px 0 10px;
+      font-size: 1.5rem;
       position: relative;
       z-index: 1;
     }
@@ -120,22 +128,21 @@
       flex: 1 1 120px;
       max-width: 150px;
       background-color: #1d4ed8;
-      padding: 10px 20px; /* Slightly smaller padding than main buttons */
-      font-size: 0.9rem; /* Slightly smaller font */
+      padding: 10px 20px;
+      font-size: 0.9rem;
     }
 
     .subject-btns button:hover {
       background-color: #2563eb;
     }
 
-    /* Flying L2 - Modified: Smaller size, lower opacity, slower movement */
+    /* Flying L2 */
     .flying {
       position: absolute;
-      font-size: 0.8rem; /* Reduced from 2rem */
-      color: rgba(255, 255, 255, 0.3); /* Added low opacity */
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.3);
       z-index: 2;
       pointer-events: none;
-      /* Slower initial speed for less chaos */
     }
 
     /* Click effect */
@@ -155,80 +162,24 @@
       to { opacity: 0; transform: translate(-50%, -50%) scale(2); }
     }
 
-    /* MOBILE RESPONSIVE - Enhanced for flying elements and subject buttons */
+    /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
-      th, td { 
-        padding: 10px 6px; 
-        font-size: 0.85em; 
-      }
-
+      th, td { padding: 10px 6px; font-size: 0.85em; }
       table { font-size: 0.85em; }
-
-      .btn-container {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .btn-container button { 
-        flex: 1 1 100%; 
-        max-width: unset; 
-      }
-
-      /* Subject buttons on mobile: Keep horizontal layout with wrap, but make smaller to mimic desktop */
-      .subject-btns {
-        flex-direction: row; /* Keep horizontal like desktop */
-        flex-wrap: wrap;
-        gap: 8px; /* Smaller gap */
-        justify-content: center;
-      }
-
-      .subject-btns button {
-        flex: 1 1 80px; /* Smaller flex basis */
-        max-width: 100px; /* Smaller max-width */
-        padding: 8px 15px; /* Reduced padding for compactness */
-        font-size: 0.8rem; /* Smaller font-size to fit better */
-        min-width: 70px; /* Ensure they don't shrink too much */
-      }
-
-      /* Flying L2 adjustments for mobile: Even smaller, lower opacity, fewer/slower */
-      .flying {
-        font-size: 0.6rem; /* Further reduced for mobile */
-        color: rgba(255, 255, 255, 0.15); /* Lower opacity on mobile to reduce distraction */
-      }
-
-      /* Reduce number of flying elements on mobile by hiding one */
-      #fly3 {
-        display: none;
-      }
-
-      /* Watermark smaller on mobile to avoid overlap */
-      body::before {
-        font-size: 4rem; /* Halved size on mobile */
-        color: rgba(255,255,255,0.1); /* Less visible on small screens */
-      }
+      .btn-container { flex-direction: column; gap: 10px; }
+      .btn-container button { flex: 1 1 100%; max-width: unset; }
+      .subject-btns { flex-direction: row; flex-wrap: wrap; gap: 8px; justify-content: center; }
+      .subject-btns button { flex: 1 1 80px; max-width: 100px; padding: 8px 15px; font-size: 0.8rem; min-width: 70px; }
+      .flying { font-size: 0.6rem; color: rgba(255, 255, 255, 0.15); }
+      #fly3 { display: none; }
+      body::before { font-size: 4rem; color: rgba(255,255,255,0.1); }
     }
 
     @media (max-width: 480px) {
       th, td { padding: 8px 4px; font-size: 0.75em; }
-
-      /* Subject buttons even smaller on very small screens */
-      .subject-btns button {
-        flex: 1 1 70px;
-        max-width: 90px;
-        padding: 6px 12px;
-        font-size: 0.75rem;
-        min-width: 60px;
-      }
-
-      /* Even more subtle on very small screens */
-      .flying {
-        font-size: 0.5rem;
-        color: rgba(255, 255, 255, 0.1);
-      }
-
-      body::before {
-        font-size: 3rem;
-      }
+      .subject-btns button { flex: 1 1 70px; max-width: 90px; padding: 6px 12px; font-size: 0.75rem; min-width: 60px; }
+      .flying { font-size: 0.5rem; color: rgba(255, 255, 255, 0.1); }
+      body::before { font-size: 3rem; }
     }
   </style>
 </head>
@@ -241,137 +192,97 @@
     <button id="syllabusBtn">Syllabus/Grade</button>
   </div>
 
-  <!-- Class Routine Table -->
-  <div class="table-container" id="classRoutine">
-    <table>
-      <tr>
-        <th>Day\Time</th>
-        <th>6:05–6:55</th>
-        <th>6:55–7:45</th>
-        <th>7:45–8:35</th>
-        <th>8:35–9:25</th>
-        <th>9:45–10:35</th>
-        <th>10:35–11:25</th>
-      </tr>
-      <tr>
-        <td>Sun</td>
-        <td>Math<sub>AP</sub></td>
-        <td>Chem<sub>KP</sub></td>
-        <td>Comp<sub>LPP</sub></td>
-        <td>Chem<sub>TP</sub></td>
-        <td>Chem<sub>KBP</sub></td>
-        <td>----</td>
-      </tr>
-      <tr>
-        <td>Mon</td>
-        <td>Nepali<sub>NSM</sub></td>
-        <td>Physics<sub>SKS</sub></td>
-        <td>Nepali<sub>URT</sub></td>
-        <td>Math<sub>AP</sub></td>
-        <td>Chem<sub>NK</sub></td>
-        <td>----</td>
-      </tr>
-      <tr>
-        <td>Tue</td>
-        <td>Math<sub>YP</sub></td>
-        <td>Nepali<sub>URT</sub></td>
-        <td>Physics<sub>UKD</sub></td>
-        <td>Math<sub>BPP</sub></td>
-        <td>Chem<sub>KBP</sub></td>
-        <td>Physics<sub>HMA</sub></td>
-      </tr>
-      <tr>
-        <td>Wed</td>
-        <td>English<sub>RL</sub></td>
-        <td>Math<sub>YP</sub></td>
-        <td>Comp<sub>LPP</sub></td>
-        <td>Physics<sub>UKD</sub></td>
-        <td>English <sub>CS</sub></td>
-        <td>Chem <sub>SBS</sub></td>
-      </tr>
-      <tr>
-        <td>Thu</td>
-        <td>Math <sub>AP</sub></td>
-        <td>Physics <sub>SKS</sub></td>
-        <td>Math <sub>YP</sub></td>
-        <td>Comp <sub>LPP</sub></td>
-        <td>Chem <sub>TP</sub></td>
-        <td>English <sub>CS</sub></td>
-      </tr>
-      <tr>
-        <td>Fri</td>
-        <td>Physics <sub>HMA</sub></td>
-        <td>Physics <sub>SKS</sub></td>
-        <td>Nepali <sub>URT</sub></td>
-        <td>Comp <sub>LPP</sub></td>
-        <td>Chem/Physics Lab</td>
-        <td>English <sub>CS</sub></td>
-      </tr>
-    </table>
+  <!-- Class Routine Cards -->
+  <div id="classRoutine" class="hidden">
+    <h2 id="routineDayTitle">Class Routine</h2>
+    <div class="class-routine-cards">
+      <div class="day-card" id="day-sun">
+        <div class="day-header">Sunday</div>
+        <div class="period-slot"><span class="time-slot">6:05–6:55</span><span class="subject-slot">Math<sub>AP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">6:55–7:45</span><span class="subject-slot">Chem<sub>KP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">7:45–8:35</span><span class="subject-slot">Comp<sub>LPP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">8:35–9:25</span><span class="subject-slot">Chem<sub>TP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">9:45–10:35</span><span class="subject-slot">Chem<sub>KBP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">10:35–11:25</span><span class="subject-slot">----</span></div>
+      </div>
+      <div class="day-card" id="day-mon">
+        <div class="day-header">Monday</div>
+        <div class="period-slot"><span class="time-slot">6:05–6:55</span><span class="subject-slot">Nepali<sub>NSM</sub></span></div>
+        <div class="period-slot"><span class="time-slot">6:55–7:45</span><span class="subject-slot">Physics<sub>SKS</sub></span></div>
+        <div class="period-slot"><span class="time-slot">7:45–8:35</span><span class="subject-slot">Nepali<sub>URT</sub></span></div>
+        <div class="period-slot"><span class="time-slot">8:35–9:25</span><span class="subject-slot">Math<sub>AP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">9:45–10:35</span><span class="subject-slot">Chem<sub>NK</sub></span></div>
+        <div class="period-slot"><span class="time-slot">10:35–11:25</span><span class="subject-slot">----</span></div>
+      </div>
+      <div class="day-card" id="day-tue">
+        <div class="day-header">Tuesday</div>
+        <div class="period-slot"><span class="time-slot">6:05–6:55</span><span class="subject-slot">Math<sub>YP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">6:55–7:45</span><span class="subject-slot">Nepali<sub>URT</sub></span></div>
+        <div class="period-slot"><span class="time-slot">7:45–8:35</span><span class="subject-slot">Physics<sub>UKD</sub></span></div>
+        <div class="period-slot"><span class="time-slot">8:35–9:25</span><span class="subject-slot">Math<sub>BPP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">9:45–10:35</span><span class="subject-slot">Chem<sub>KBP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">10:35–11:25</span><span class="subject-slot">Physics<sub>HMA</sub></span></div>
+      </div>
+      <div class="day-card" id="day-wed">
+        <div class="day-header">Wednesday</div>
+        <div class="period-slot"><span class="time-slot">6:05–6:55</span><span class="subject-slot">English<sub>RL</sub></span></div>
+        <div class="period-slot"><span class="time-slot">6:55–7:45</span><span class="subject-slot">Math<sub>YP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">7:45–8:35</span><span class="subject-slot">Comp<sub>LPP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">8:35–9:25</span><span class="subject-slot">Physics<sub>UKD</sub></span></div>
+        <div class="period-slot"><span class="time-slot">9:45–10:35</span><span class="subject-slot">English <sub>CS</sub></span></div>
+        <div class="period-slot"><span class="time-slot">10:35–11:25</span><span class="subject-slot">Chem <sub>SBS</sub></span></div>
+      </div>
+      <div class="day-card" id="day-thu">
+        <div class="day-header">Thursday</div>
+        <div class="period-slot"><span class="time-slot">6:05–6:55</span><span class="subject-slot">Math<sub>AP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">6:55–7:45</span><span class="subject-slot">Physics<sub>SKS</sub></span></div>
+        <div class="period-slot"><span class="time-slot">7:45–8:35</span><span class="subject-slot">Math<sub>YP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">8:35–9:25</span><span class="subject-slot">Comp<sub>LPP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">9:45–10:35</span><span class="subject-slot">Chem<sub>TP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">10:35–11:25</span><span class="subject-slot">English<sub>CS</sub></span></div>
+      </div>
+      <div class="day-card" id="day-fri">
+        <div class="day-header">Friday</div>
+        <div class="period-slot"><span class="time-slot">6:05–6:55</span><span class="subject-slot">Physics<sub>HMA</sub></span></div>
+        <div class="period-slot"><span class="time-slot">6:55–7:45</span><span class="subject-slot">Physics<sub>SKS</sub></span></div>
+        <div class="period-slot"><span class="time-slot">7:45–8:35</span><span class="subject-slot">Nepali<sub>URT</sub></span></div>
+        <div class="period-slot"><span class="time-slot">8:35–9:25</span><span class="subject-slot">Comp<sub>LPP</sub></span></div>
+        <div class="period-slot"><span class="time-slot">9:45–10:35</span><span class="subject-slot">Chem/Physics Lab</span></div>
+        <div class="period-slot"><span class="time-slot">10:35–11:25</span><span class="subject-slot">English<sub>CS</sub></span></div>
+      </div>
+      <div class="day-card hidden" id="day-sat">
+        <div class="day-header">Saturday</div>
+        <div class="period-slot"><span class="time-slot">----</span><span class="subject-slot">----</span></div>
+      </div>
+    </div>
   </div>
 
   <!-- Cycle Test Routine Table -->
   <div class="table-container hidden" id="cycleRoutine">
     <table>
-      <tr>
-        <th>Date</th>
-        <th>Day</th>
-        <th>Subject</th>
-      </tr>
-      <tr><td>2082/06/27</td><td>Mon</td><td>Computer Science</td></tr>
-      <tr><td>2082/06/28</td><td>Tue</td><td>Mathematics</td></tr>
-      <tr><td>2082/06/29</td><td>Wed</td><td>Physics</td></tr>
-      <tr><td>2082/06/30</td><td>Thu</td><td>Chemistry</td></tr>
-      <tr><td>2082/07/01</td><td>Sat</td><td>Nepali</td></tr>
-      <tr><td>2082/07/01</td><td>Sun</td><td>English</td></tr>
+      <tr><th>Date</th><th>Day</th><th>Subject</th></tr>
+      <tr><td>12-Oct</td><td>Sunday</td><td>Math / Physics</td></tr>
+      <tr><td>13-Oct</td><td>Monday</td><td>English / Chemistry</td></tr>
+      <tr><td>14-Oct</td><td>Tuesday</td><td>Computer / Logic</td></tr>
     </table>
   </div>
 
-  <!-- Syllabus / Grade Section -->
-  <div id="syllabusSection" class="hidden">
-    <div class="subject-btns">
-      <button id="physicsBtn">Physics</button>
-      <button id="chemistryBtn">Chemistry</button>
-      <button id="computerBtn">Computer</button>
-    </div>
-
-    <div class="table-container hidden" id="physicsTable">
-      <table>
-        <tr><th>Physics Topics</th></tr>
-        <tr><td>1. Vectors</td></tr>
-        <tr><td>2. Reflection</td></tr>
-        <tr><td>3. Thermal Expansion</td></tr>
-        <tr><td>4. Thermal Expansion (continued)</td></tr>
-      </table>
-    </div>
-
-    <div class="table-container hidden" id="chemistryTable">
-      <table>
-        <tr><th>Chemistry Topics</th></tr>
-        <tr><td>1. Stoichiometry</td></tr>
-        <tr><td>2. Chemical Equilibrium</td></tr>
-        <tr><td>3. Metallurgy</td></tr>
-        <tr><td>4. Organic Chemistry</td></tr>
-      </table>
-    </div>
-
-    <div class="table-container hidden" id="computerTable">
-      <table>
-        <tr><th>Computer Topics</th></tr>
-        <tr><td>1. Multimedia</td></tr>
-        <tr><td>2. Programming Concepts and Logic</td></tr>
-        <tr><td>3. Flowcharts</td></tr>
-      </table>
-    </div>
+  <!-- Syllabus / Grade Buttons -->
+  <div class="subject-btns hidden" id="syllabusSection">
+    <button>Physics</button>
+    <button>Chemistry</button>
+    <button>Computer (Logic of Programming)</button>
+    <button>Computer (Concept of Programming)</button>
+    <button>Computer (Flowchart)</button>
   </div>
 
-  <!-- Flying L2 Elements -->
+  <!-- Flying L2 elements -->
   <div class="flying" id="fly1">L2</div>
   <div class="flying" id="fly2">L2</div>
   <div class="flying" id="fly3">L2</div>
 
   <script>
-    // Buttons & Sections
+    // Button toggles
     const classBtn = document.getElementById('classBtn');
     const cycleBtn = document.getElementById('cycleBtn');
     const syllabusBtn = document.getElementById('syllabusBtn');
@@ -380,19 +291,11 @@
     const cycleRoutine = document.getElementById('cycleRoutine');
     const syllabusSection = document.getElementById('syllabusSection');
 
-    const physicsBtn = document.getElementById('physicsBtn');
-    const chemistryBtn = document.getElementById('chemistryBtn');
-    const computerBtn = document.getElementById('computerBtn');
-
-    const physicsTable = document.getElementById('physicsTable');
-    const chemistryTable = document.getElementById('chemistryTable');
-    const computerTable = document.getElementById('computerTable');
-
-    // Main buttons
     classBtn.addEventListener('click', () => {
       classRoutine.classList.remove('hidden');
       cycleRoutine.classList.add('hidden');
       syllabusSection.classList.add('hidden');
+      showTodayOrTomorrowRoutine();
     });
 
     cycleBtn.addEventListener('click', () => {
@@ -405,65 +308,55 @@
       classRoutine.classList.add('hidden');
       cycleRoutine.classList.add('hidden');
       syllabusSection.classList.remove('hidden');
-      physicsTable.classList.add('hidden');
-      chemistryTable.classList.add('hidden');
-      computerTable.classList.add('hidden');
     });
 
-    // Subject buttons
-    physicsBtn.addEventListener('click', () => {
-      physicsTable.classList.remove('hidden');
-      chemistryTable.classList.add('hidden');
-      computerTable.classList.add('hidden');
+    // Show today's or tomorrow's routine based on Nepal Time
+    const dayMap = ['day-sun','day-mon','day-tue','day-wed','day-thu','day-fri','day-sat'];
+
+    function showTodayOrTomorrowRoutine() {
+      const now = new Date();
+
+      const nepalOffset = 5*60 + 45;
+      const utcOffset = now.getTimezoneOffset();
+      let totalMinutes = now.getHours()*60 + now.getMinutes() + (nepalOffset + utcOffset);
+      let nepalHour = Math.floor(totalMinutes/60);
+      let nepalMinute = totalMinutes % 60;
+
+      if (nepalHour >= 24) nepalHour -= 24;
+
+      let dayIndex = now.getDay();
+      if (nepalHour >= 10) dayIndex = (dayIndex+1)%7;
+
+      dayMap.forEach(id => document.getElementById(id).classList.add('hidden'));
+      document.getElementById(dayMap[dayIndex]).classList.remove('hidden');
+
+      const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+      document.getElementById('routineDayTitle').textContent = dayNames[dayIndex] + ' Routine';
+    }
+
+    // Flying L2 random movement
+    const flies = [document.getElementById('fly1'),document.getElementById('fly2'),document.getElementById('fly3')];
+    flies.forEach(f => {
+      f.style.top = Math.random()*90 + 'vh';
+      f.style.left = Math.random()*90 + 'vw';
     });
-    chemistryBtn.addEventListener('click', () => {
-      chemistryTable.classList.remove('hidden');
-      physicsTable.classList.add('hidden');
-      computerTable.classList.add('hidden');
-    });
-    computerBtn.addEventListener('click', () => {
-      computerTable.classList.remove('hidden');
-      physicsTable.classList.add('hidden');
-      chemistryTable.classList.add('hidden');
-    });
 
-    // Flying L2 animation - Modified: Slower speed (reduced dx/dy range) for better mobile feel
-    const flies = [
-      document.getElementById('fly1'),
-      document.getElementById('fly2'),
-      document.getElementById('fly3')
-    ];
-
-    flies.forEach(fly => {
-      let x = Math.random() * window.innerWidth;
-      let y = Math.random() * window.innerHeight;
-      let dx = (Math.random() - 0.5) * 0.8; /* Reduced speed from *2 to *0.8 */
-      let dy = (Math.random() - 0.5) * 0.8; /* Slower movement, less chaotic on mobile */
-
-      function move() {
-        x += dx;
-        y += dy;
-
-        if (x < 0 || x > window.innerWidth) dx = -dx;
-        if (y < 0 || y > window.innerHeight) dy = -dy;
-
-        fly.style.left = x + 'px';
-        fly.style.top = y + 'px';
-        requestAnimationFrame(move);
-      }
-      move();
-    });
+    setInterval(() => {
+      flies.forEach(f => {
+        f.style.top = Math.random()*90 + 'vh';
+        f.style.left = Math.random()*90 + 'vw';
+      });
+    }, 2000);
 
     // Click effect
     document.body.addEventListener('click', e => {
-      const dot = document.createElement('div');
-      dot.classList.add('click-effect');
-      dot.style.left = e.clientX + 'px';
-      dot.style.top = e.clientY + 'px';
-      document.body.appendChild(dot);
-      setTimeout(() => dot.remove(), 500);
+      const el = document.createElement('div');
+      el.className = 'click-effect';
+      el.style.top = e.clientY + 'px';
+      el.style.left = e.clientX + 'px';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 500);
     });
   </script>
-
 </body>
 </html>
