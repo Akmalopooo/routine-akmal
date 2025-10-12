@@ -3,19 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>L2 🐴</title>
-<link rel="icon" href="assets/image.png" type="image/png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
-  <link rel="icon" href="assets/image.png" type="image/png">
+<!-- Website logo -->
+<link rel="icon" href="assets/image.png" type="image/png">
 <link rel="shortcut icon" href="assets/image.png" type="image/png">
-<style>
-/* Loader */
-#loader { position: fixed; top:0; left:0; width:100%; height:4px; background: rgba(255,255,255,0.1); z-index:9999;}
-#progress { width:0%; height:100%; background:#fff; animation: load 2s linear forwards;}
-@keyframes load { 0% { width:0%; } 100% { width:100%; } }
 
-/* Page styling */
+<style>
 body {
   font-family:'Poppins',sans-serif;
   margin:0; padding:0;
@@ -34,41 +29,31 @@ body::before {
   pointer-events:none;
   z-index:0;
 }
-h1 {margin:30px 0 10px;color:#fff;}
-.btn-container {margin:20px 0; display:flex; justify-content:center; flex-wrap:wrap; gap:15px;}
-button {
-  background:#4c1d95; color:#fff;
-  border:none; padding:12px 25px;
-  font-size:1rem; cursor:pointer;
-  border-radius:8px; transition:0.3s;
+h1 { margin:30px 0 10px;color:#fff; }
+.btn-container{ margin:20px 0; display:flex; justify-content:center; flex-wrap:wrap; gap:15px;}
+button{
+  background:#4c1d95; color:#fff; border:none; padding:12px 25px;
+  font-size:1rem; cursor:pointer; border-radius:8px; transition:0.3s;
   flex:1 1 150px; max-width:200px;
 }
-button:hover {background:#6d28d9;}
-.routine-card {
-  background:rgba(42,42,61,0.85); padding:15px;
-  border-radius:10px; max-width:400px; margin:15px auto;
+button:hover{ background:#6d28d9; }
+.routine-card{
+  background:rgba(42,42,61,0.85); padding:15px; border-radius:10px;
+  max-width:400px; margin:15px auto;
 }
-.routine-card h2 {margin-bottom:10px;color:#fff;}
-.period-slot {display:flex; justify-content:space-between; margin:3px 0; font-size:0.9rem;}
-.flying {position:absolute; font-size:0.8rem; color:rgba(255,255,255,0.3); z-index:2; pointer-events:none;}
-@media(max-width:768px){.routine-card{width:90%;}.flying{font-size:0.6rem;}}
-@media(max-width:480px){.flying{font-size:0.5rem;}}
-@keyframes fadeOut{to{opacity:0; transform:translate(-50%,-50%) scale(2);}}
-.click-effect {
-  position:absolute; width:20px; height:20px;
-  background:#fff; border-radius:50%;
-  transform:translate(-50%,-50%);
-  pointer-events:none; z-index:3;
-  animation:fadeOut 0.5s forwards;
+.routine-card h2{ margin-bottom:10px; color:#fff; }
+.period-slot{
+  display:flex; justify-content:space-between; margin:3px 0; font-size:0.9rem;
 }
+.flying{
+  position:absolute; font-size:0.8rem; color:rgba(255,255,255,0.3);
+  z-index:2; pointer-events:none;
+}
+@media(max-width:768px){ .routine-card{width:90%;}.flying{font-size:0.6rem;} }
+@media(max-width:480px){ .flying{font-size:0.5rem;} }
 </style>
 </head>
 <body>
-
-<!-- Loader -->
-<div id="loader">
-  <div id="progress"></div>
-</div>
 
 <h1>L2</h1>
 
@@ -78,8 +63,10 @@ button:hover {background:#6d28d9;}
   <button onclick="location.href='syllabus.html'">Syllabus / Grade</button>
 </div>
 
-<!-- Routine & Cycle Test Preview -->
+<!-- Routine Preview -->
 <div class="routine-card" id="todayRoutine"></div>
+
+<!-- Tomorrow's Cycle Test -->
 <div class="routine-card" id="nextTest"></div>
 
 <!-- Flying L2 -->
@@ -88,85 +75,99 @@ button:hover {background:#6d28d9;}
 <div class="flying" id="fly3">L2</div>
 
 <script>
-// Hide loader after 2s
-setTimeout(()=>{document.getElementById('loader').style.display='none';},2000);
-
-// Original Class Routine Data (with teachers/labels)
+// Class Routine Data
 const routineData = {
-  'Sunday':[["6:05–6:55","Math AP"], ["6:55–7:45","Chem KP"], ["7:45–8:35","Comp LPP"], ["8:35–9:25","Chem TP"], ["9:45–10:35","Chem KBP"], ["10:35–11:25","----"]],
-  'Monday':[["6:05–6:55","Nepali NSM"], ["6:55–7:45","Physics SKS"], ["7:45–8:35","Nepali URT"], ["8:35–9:25","Math AP"], ["9:45–10:35","Chem NK"], ["10:35–11:25","----"]],
-  'Tuesday':[["6:05–6:55","Math YP"], ["6:55–7:45","Nepali URT"], ["7:45–8:35","Physics UKD"], ["8:35–9:25","Math BPP"], ["9:45–10:35","Chem KBP"], ["10:35–11:25","Physics HMA"]],
-  'Wednesday':[["6:05–6:55","English RL"], ["6:55–7:45","Math YP"], ["7:45–8:35","Comp LPP"], ["8:35–9:25","Physics UKD"], ["9:45–10:35","English CS"], ["10:35–11:25","Chem SBS"]],
-  'Thursday':[["6:05–6:55","Math AP"], ["6:55–7:45","Physics SKS"], ["7:45–8:35","Math YP"], ["8:35–9:25","Comp LPP"], ["9:45–10:35","Chem TP"], ["10:35–11:25","English CS"]],
-  'Friday':[["6:05–6:55","Physics HMA"], ["6:55–7:45","Physics SKS"], ["7:45–8:35","Nepali URT"], ["8:35–9:25","Comp LPP"], ["9:45–10:35","Chem/Physics Lab"], ["10:35–11:25","English CS"]],
+  'Sunday':[["6:05–6:55","Math"], ["6:55–7:45","Physics"], ["7:45–8:35","Nepali"], ["8:35–9:25","Math"], ["9:45–10:35","Chemistry"], ["10:35–11:25","----"]],
+  'Monday':[["6:05–6:55","Nepali"], ["6:55–7:45","Physics"], ["7:45–8:35","Nepali"], ["8:35–9:25","Math"], ["9:45–10:35","Chemistry"], ["10:35–11:25","----"]],
+  'Tuesday':[["6:05–6:55","Math"], ["6:55–7:45","Nepali"], ["7:45–8:35","Physics"], ["8:35–9:25","Math"], ["9:45–10:35","Chemistry"], ["10:35–11:25","Physics"]],
+  'Wednesday':[["6:05–6:55","English"], ["6:55–7:45","Math"], ["7:45–8:35","Computer"], ["8:35–9:25","Physics"], ["9:45–10:35","English"], ["10:35–11:25","Chemistry"]],
+  'Thursday':[["6:05–6:55","Math"], ["6:55–7:45","Physics"], ["7:45–8:35","Math"], ["8:35–9:25","Computer"], ["9:45–10:35","Chemistry"], ["10:35–11:25","English"]],
+  'Friday':[["6:05–6:55","Physics"], ["6:55–7:45","Physics"], ["7:45–8:35","Nepali"], ["8:35–9:25","Computer"], ["9:45–10:35","Chem/Physics Lab"], ["10:35–11:25","English"]],
   'Saturday':[["----","----"]]
 };
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-// Cycle Test Data (AD dates)
+// Cycle Test Data
 const cycleTest = [
   {date:'2025-10-12', subject:'Computer'},
-  {date:'2025-10-13', subject:'Math'},
-  {date:'2025-10-14', subject:'Physics'},
-  {date:'2025-10-15', subject:'Chemistry'},
-  {date:'2025-10-16', subject:'Nepali'},
-  {date:'2025-10-17', subject:'English'}
+  {date:'2025-10-13', subject:'Math / English'},
+  {date:'2025-10-14', subject:'Physics / Chemistry'},
+  {date:'2025-10-15', subject:'Nepali / English'}
 ];
 
-// Get Nepal Time
+// Get Nepal Date
 function getNepalDate(){
   const now = new Date();
   const utc = now.getTime() + now.getTimezoneOffset()*60000;
-  const nepalOffset = 5.75*60*60000; // 5h45m
-  return new Date(utc + nepalOffset);
+  const nepalOffset = 5.75*60*60000;
+  return new Date(utc+nepalOffset);
 }
 
-// Show routine & next cycle test
-function showRoutine(){
-  const nepDate = getNepalDate();
-  const hour = nepDate.getHours();
-  let routineDayIndex = nepDate.getDay();
-  
-  // Routine: after 10am show next day
-  let routineLabel = "Today's Routine";
-  if(hour>=10) {
-    routineDayIndex = (routineDayIndex+1)%7;
-    routineLabel = "Tomorrow's Routine";
+// Show Routine & Cycle Test
+function showTomorrowRoutineAndTest(){
+  let nepDate = getNepalDate();
+
+  // If after 10AM Nepal time, shift to next day
+  if(nepDate.getHours()>=10){
+    nepDate.setDate(nepDate.getDate()+1);
   }
 
-  const card = document.getElementById('todayRoutine');
-  card.innerHTML = `<h2>${routineLabel}</h2>` +
-    routineData[dayNames[routineDayIndex]].map(slot=>
-      `<div class="period-slot"><span>${slot[0]}</span><span>${slot[1]}</span></div>`
-    ).join('');
+  const dayName = nepDate.toLocaleDateString('en-US',{ weekday:'long' }).toUpperCase();
 
-  // Next Cycle Test: first test with date >= today
-  const todayStr = nepDate.toISOString().split('T')[0];
-  let nextTest = cycleTest.find(t=>t.date>=todayStr);
-  if(!nextTest) nextTest = cycleTest[0]; // fallback
+  // Routine
+  const routineCard = document.getElementById('todayRoutine');
+  routineCard.innerHTML = `
+    <h2 style="font-size:2rem; font-weight:bold; color:#fff; text-shadow:0 0 10px #6d28d9,0 0 20px #4c1d95;">
+      ${dayName}'s Routine
+    </h2>
+    ${routineData[dayNames[nepDate.getDay()]].map(slot=>`<div class="period-slot"><span>${slot[0]}</span><span>${slot[1]}</span></div>`).join('')}
+  `;
+
+  // Cycle Test
+  const tomorrowStr = nepDate.toISOString().split('T')[0];
+  let nextTest = cycleTest.find(t=>t.date>=tomorrowStr);
+  if(!nextTest) nextTest=cycleTest[0];
+
   const testCard = document.getElementById('nextTest');
-  testCard.innerHTML = `<h2>Upcoming Cycle Test</h2>
-                        <div class="period-slot"><span>${nextTest.date}</span><span>${nextTest.subject}</span></div>`;
+  testCard.innerHTML = `
+    <h2 style="font-size:2.5rem; font-weight:bold; color:#fff; margin-bottom:10px; text-shadow:0 0 10px #6d28d9,0 0 20px #4c1d95;">
+      ${dayName}
+    </h2>
+    <div class="period-slot" style="justify-content:center; font-size:1.2rem; background:rgba(255,255,255,0.05); padding:10px; border-radius:8px; margin-top:5px;">
+      <span style="font-weight:600;">${nextTest.date}</span> - <span>${nextTest.subject}</span>
+    </div>
+  `;
 }
 
-showRoutine();
+// Initial display
+showTomorrowRoutineAndTest();
+// Refresh every 5 min
+setInterval(showTomorrowRoutineAndTest,300000);
 
 // Flying L2 animation
-const flies = [document.getElementById('fly1'),document.getElementById('fly2'),document.getElementById('fly3')];
+const flies=[document.getElementById('fly1'),document.getElementById('fly2'),document.getElementById('fly3')];
 flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});
 setInterval(()=>{flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});},2000);
 
 // Click effect
-document.body.addEventListener('click', e=>{
+document.body.addEventListener('click',e=>{
   const el=document.createElement('div');
-  el.className='click-effect';
   el.style.top=e.clientY+'px';
   el.style.left=e.clientX+'px';
+  el.style.width='20px'; el.style.height='20px'; el.style.background='#fff';
+  el.style.borderRadius='50%'; el.style.position='absolute';
+  el.style.transform='translate(-50%,-50%)';
+  el.style.pointerEvents='none';
+  el.style.zIndex='3';
+  el.style.animation='fadeOut 0.5s forwards';
   document.body.appendChild(el);
   setTimeout(()=>el.remove(),500);
 });
 </script>
 
+<style>
+@keyframes fadeOut{to{opacity:0;transform:translate(-50%,-50%) scale(2);}}
+</style>
+
 </body>
 </html>
-
