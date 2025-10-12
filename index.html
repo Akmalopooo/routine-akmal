@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <title>Routine</title>
-  <link rel="icon" type="image/png" href="image.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -13,90 +12,53 @@
       margin: 0;
       padding: 0;
       color: #ddd;
-      overflow-x: hidden;
-    }
-
-    /* Loader screen */
-    #loader {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(-45deg, #4b0082, #2e0854, #5d3fd3, #4c1d95);
-      background-size: 400% 400%;
-      animation: gradientBG 10s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      z-index: 9999;
-      color: #fff;
-      transition: opacity 1s ease;
-    }
-
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .loader-text {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 20px;
-      text-shadow: 0 0 6px #a855f7, 0 0 12px #6d28d9;
-      animation: bounce 2s infinite;
-      letter-spacing: 4px;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .loader-gif img {
-      width: 160px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-
-    .final-cat {
-      display: none;
-      width: 200px;
-      margin: 20px auto 0;
-      border-radius: 10px;
-    }
-
-    #main-content {
-      display: none;
-      padding-bottom: 50px;
-      position: relative;
-      z-index: 1;
+      text-align: center;
     }
 
     h1 {
-      text-align: center;
-      margin: 30px 15px 20px;
-      color: #f5f5f5;
+      margin-top: 30px;
+      color: #fff;
     }
 
-    /* Table styling */
+    .btn-container {
+      margin: 20px 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    button {
+      background-color: #4c1d95;
+      color: #fff;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: 0.3s;
+      flex: 1 1 150px;
+      max-width: 200px;
+    }
+
+    button:hover {
+      background-color: #6d28d9;
+    }
+
     .table-container {
-      width: 100%;
+      width: 95%;
+      max-width: 1000px;
+      margin: 0 auto 50px;
       overflow-x: auto;
-      padding: 15px;
-      position: relative;
     }
 
     table {
       width: 100%;
-      min-width: 800px;
       border-collapse: collapse;
       background-color: rgba(42, 42, 61, 0.85);
       border-radius: 10px;
       overflow: hidden;
       box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-      position: relative;
     }
 
     th, td {
@@ -109,191 +71,159 @@
 
     th {
       background: #2e0854;
-      color: #fff;
       font-weight: 600;
     }
 
     td:first-child {
       background: rgba(42, 42, 61, 0.85);
       font-weight: 600;
-      color: #e0e0e0;
     }
 
     tr:nth-child(even) { background-color: rgba(36, 36, 54, 0.65); }
     tr:nth-child(odd) { background-color: rgba(46, 46, 66, 0.65); }
 
-    /* Watermark */
-    .table-container::after {
-      content: "AKMAL";
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%) rotate(-20deg);
-      font-size: 8rem;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 0.05);
-      pointer-events: none;
-      z-index: 0;
-    }
+    .hidden { display: none; }
 
-    /* Floating L2s */
-    .floating {
-      position: fixed;
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: rgba(255, 255, 255, 0.1);
-      animation: float 12s infinite linear;
-      z-index: 0;
-    }
-
-    .l2-one { top: 20%; left: 10%; animation-delay: 0s; }
-    .l2-two { bottom: 15%; right: 15%; animation-delay: 5s; }
-
-    @keyframes float {
-      0% { transform: translateY(0) translateX(0) rotate(0deg); }
-      50% { transform: translateY(-40px) translateX(20px) rotate(15deg); }
-      100% { transform: translateY(0) translateX(0) rotate(0deg); }
-    }
-
-    /* MOBILE FIXES */
+    /* MOBILE RESPONSIVE */
     @media (max-width: 768px) {
-      .loader-text {
-        font-size: 2.2rem;
+      th, td { 
+        padding: 10px 6px; 
+        font-size: 0.85em; 
       }
 
-      .loader-gif img,
-      .final-cat {
-        width: 140px;
+      table { 
+        font-size: 0.85em; 
       }
 
-      table {
-        min-width: unset;
-        width: 100%;
-        font-size: 0.8em;
+      .btn-container {
+        flex-direction: column;
+        gap: 10px;
       }
 
+      button {
+        flex: 1 1 100%;
+        max-width: unset;
+      }
+    }
+
+    @media (max-width: 480px) {
       th, td {
-        padding: 10px 6px;
-        word-break: break-word;
-      }
-
-      td sub {
-        display: block;
+        padding: 8px 4px;
         font-size: 0.75em;
-        margin-top: 4px;
-        color: #bbb;
-      }
-
-      .table-container::after {
-        font-size: 4rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Loader Screen -->
-  <div id="loader">
-    <div class="loader-text">AKMAL</div>
-    <div class="loader-gif">
-      <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" alt="Jumping Cat">
-    </div>
-    <h2>Loading your routine...</h2>
-    <img id="final-cat" class="final-cat" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" alt="Cat Tongue Out">
+
+  <h1>My Routine</h1>
+  <div class="btn-container">
+    <button id="classBtn">Class Routine</button>
+    <button id="cycleBtn">Cycle Test Routine</button>
   </div>
 
-  <!-- Main Content -->
-  <div id="main-content">
-    <h1>Routine</h1>
-    <div class="table-container">
-      <table>
-        <tr>
-          <th>Day\Time</th>
-          <th>6:05–6:55</th>
-          <th>6:55–7:45</th>
-          <th>7:45–8:35</th>
-          <th>8:35–9:25</th>
-          <th>9:45–10:35</th>
-          <th>10:35–11:25</th>
-        </tr>
-        <tr>
-          <td>Sun</td>
-          <td>Math<sub>AP</sub></td>
-          <td>Chem<sub>KP</sub></td>
-          <td>Comp<sub>LPP</sub></td>
-          <td>Chem<sub>TP</sub></td>
-          <td>Chem<sub>KBP</sub></td>
-          <td>----</td>
-        </tr>
-        <tr>
-          <td>Mon</td>
-          <td>Nepali<sub>NSM</sub></td>
-          <td>Physics<sub>SKS</sub></td>
-          <td>Nepali<sub>URT</sub></td>
-          <td>Math<sub>AP</sub></td>
-          <td>Chem<sub>NK</sub></td>
-          <td>----</td>
-        </tr>
-        <tr>
-          <td>Tue</td>
-          <td>Math<sub>YP</sub></td>
-          <td>Nepali<sub>URT</sub></td>
-          <td>Physics<sub>UKD</sub></td>
-          <td>Math<sub>BPP</sub></td>
-          <td>Chem<sub>KBP</sub></td>
-          <td>Physics<sub>HMA</sub></td>
-        </tr>
-        <tr>
-          <td>Wed</td>
-          <td>English<sub>RL</sub></td>
-          <td>Math<sub>YP</sub></td>
-          <td>Comp<sub>LPP</sub></td>
-          <td>Physics<sub>UKD</sub></td>
-
-          <td>English <sub>CS</sub></td>
-          <td>Chem <sub>SBS</sub></td>
-        </tr>
-        <tr>
-          <td>Thu</td>
-          <td>Math <sub>AP</sub></td>
-          <td>Physics <sub>SKS</sub></td>
-          <td>Math <sub>YP</sub></td>
-          <td>Comp <sub>LPP</sub></td>
-          <td>Chem <sub>TP</sub></td>
-          <td>English <sub>CS</sub></td>
-        </tr>
-        <tr>
-          <td>Fri</td>
-          <td>Physics <sub>HMA</sub></td>
-          <td>Physics <sub>SKS</sub></td>
-          <td>Nepali <sub>URT</sub></td>
-          <td>Comp <sub>LPP</sub></td>
-          <td>Chem/Physics Lab</td>
-          <td>English <sub>CS</sub></td>
-        </tr>
-      </table>
-    </div>
+  <!-- Class Routine Table -->
+  <div class="table-container" id="classRoutine">
+    <table>
+      <tr>
+        <th>Day\Time</th>
+        <th>6:05–6:55</th>
+        <th>6:55–7:45</th>
+        <th>7:45–8:35</th>
+        <th>8:35–9:25</th>
+        <th>9:45–10:35</th>
+        <th>10:35–11:25</th>
+      </tr>
+      <tr>
+        <td>Sun</td>
+        <td>Math<sub>AP</sub></td>
+        <td>Chem<sub>KP</sub></td>
+        <td>Comp<sub>LPP</sub></td>
+        <td>Chem<sub>TP</sub></td>
+        <td>Chem<sub>KBP</sub></td>
+        <td>----</td>
+      </tr>
+      <tr>
+        <td>Mon</td>
+        <td>Nepali<sub>NSM</sub></td>
+        <td>Physics<sub>SKS</sub></td>
+        <td>Nepali<sub>URT</sub></td>
+        <td>Math<sub>AP</sub></td>
+        <td>Chem<sub>NK</sub></td>
+        <td>----</td>
+      </tr>
+      <tr>
+        <td>Tue</td>
+        <td>Math<sub>YP</sub></td>
+        <td>Nepali<sub>URT</sub></td>
+        <td>Physics<sub>UKD</sub></td>
+        <td>Math<sub>BPP</sub></td>
+        <td>Chem<sub>KBP</sub></td>
+        <td>Physics<sub>HMA</sub></td>
+      </tr>
+      <tr>
+        <td>Wed</td>
+        <td>English<sub>RL</sub></td>
+        <td>Math<sub>YP</sub></td>
+        <td>Comp<sub>LPP</sub></td>
+        <td>Physics<sub>UKD</sub></td>
+        <td>English <sub>CS</sub></td>
+        <td>Chem <sub>SBS</sub></td>
+      </tr>
+      <tr>
+        <td>Thu</td>
+        <td>Math <sub>AP</sub></td>
+        <td>Physics <sub>SKS</sub></td>
+        <td>Math <sub>YP</sub></td>
+        <td>Comp <sub>LPP</sub></td>
+        <td>Chem <sub>TP</sub></td>
+        <td>English <sub>CS</sub></td>
+      </tr>
+      <tr>
+        <td>Fri</td>
+        <td>Physics <sub>HMA</sub></td>
+        <td>Physics <sub>SKS</sub></td>
+        <td>Nepali <sub>URT</sub></td>
+        <td>Comp <sub>LPP</sub></td>
+        <td>Chem/Physics Lab</td>
+        <td>English <sub>CS</sub></td>
+      </tr>
+    </table>
   </div>
 
-  <!-- Meow sound -->
-  <audio id="meow-sound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
+  <!-- Cycle Test Routine Table -->
+  <div class="table-container hidden" id="cycleRoutine">
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Day</th>
+        <th>Subject</th>
+      </tr>
+      <tr><td>2082/06/27</td><td>Mon</td><td>Computer Science</td></tr>
+      <tr><td>2082/06/28</td><td>Tue</td><td>Mathematics</td></tr>
+      <tr><td>2082/06/29</td><td>Wed</td><td>Physics</td></tr>
+      <tr><td>2082/06/30</td><td>Thu</td><td>Chemistry</td></tr>
+      <tr><td>2082/07/01</td><td>Fri</td><td>Nepali</td></tr>
+      <tr><td>2082/07/01</td><td>Fri</td><td>English</td></tr>
+    </table>
+  </div>
 
   <script>
-    // After 8s show cat tongue
-    setTimeout(() => {
-      document.querySelector(".loader-gif").style.display = "none";
-      document.getElementById("final-cat").style.display = "block";
-    }, 8000);
+    const classBtn = document.getElementById('classBtn');
+    const cycleBtn = document.getElementById('cycleBtn');
+    const classRoutine = document.getElementById('classRoutine');
+    const cycleRoutine = document.getElementById('cycleRoutine');
 
-    // After 10s hide loader and show routine
-    setTimeout(() => {
-      document.getElementById("loader").style.opacity = "0";
-      setTimeout(() => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("main-content").style.display = "block";
-        document.getElementById("meow-sound").play();
-      }, 1000);
-    }, 10000);
+    classBtn.addEventListener('click', () => {
+      classRoutine.classList.remove('hidden');
+      cycleRoutine.classList.add('hidden');
+    });
+
+    cycleBtn.addEventListener('click', () => {
+      classRoutine.classList.add('hidden');
+      cycleRoutine.classList.remove('hidden');
+    });
   </script>
+
 </body>
 </html>
-
-
