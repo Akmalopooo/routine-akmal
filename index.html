@@ -22,10 +22,7 @@
   background: #fff;
   animation: load 2s linear forwards;
 }
-@keyframes load {
-  0% { width: 0%; }
-  100% { width: 100%; }
-}
+@keyframes load { 0% { width: 0%; } 100% { width: 100%; } }
 
 /* Page styling */
 body {
@@ -121,7 +118,7 @@ button:hover {background:#6d28d9;}
   <button onclick="location.href='syllabus.html'">Syllabus / Grade</button>
 </div>
 
-<!-- Today/Tomorrow Routine Preview -->
+<!-- Routine & Cycle Test Preview -->
 <div class="routine-card" id="todayRoutine"></div>
 <div class="routine-card" id="tomorrowTest"></div>
 
@@ -146,23 +143,22 @@ const routineData = {
 };
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-// Cycle Test Data (Updated BS dates)
+// Cycle Test Data (Bikram Sambat dates, Friday skipped)
 const cycleTest = [
   {date:'2082/06/27', day:'Monday', subject:'Computer'},
   {date:'2082/06/28', day:'Tuesday', subject:'Math'},
   {date:'2082/06/29', day:'Wednesday', subject:'Physics'},
   {date:'2082/06/30', day:'Thursday', subject:'Chemistry'},
-  // Friday skipped
   {date:'2082/07/01', day:'Saturday', subject:'Nepali'},
   {date:'2082/07/02', day:'Sunday', subject:'English'}
 ];
 
-// Function to show today's/tomorrow's routine
+// Show today's routine and tomorrow's cycle test
 function showRoutine(){
   const now = new Date();
   const utcOffset = now.getTimezoneOffset();
   const nepalOffset = 5*60 + 45;
-  let totalMinutes = now.getHours()*60 + now.getMinutes() + (nepalOffset+utcOffset);
+  let totalMinutes = now.getHours()*60 + now.getMinutes() + (nepalOffset + utcOffset);
   let hour = Math.floor(totalMinutes/60);
   if(hour>=24) hour-=24;
 
@@ -173,17 +169,25 @@ function showRoutine(){
     routineLabel = "Tomorrow's Routine";
   }
 
+  // Show routine
   const card = document.getElementById('todayRoutine');
   card.innerHTML = `<h2>${routineLabel}</h2>` +
-    routineData[dayNames[dayIndex]].map(slot => 
+    routineData[dayNames[dayIndex]].map(slot =>
       `<div class="period-slot"><span>${slot[0]}</span><span>${slot[1]}</span></div>`
     ).join('');
 
-  // Tomorrow's cycle test
-  const testDayIndex = (dayIndex+1) % cycleTest.length;
-  const test = cycleTest[testDayIndex];
+  // Show cycle test dynamically
+  let testIndex = 0;
+  for(let i=0;i<cycleTest.length;i++){
+    if(dayNames.indexOf(cycleTest[i].day) >= dayIndex) { 
+      testIndex = i; 
+      break;
+    }
+  }
+  if(hour>=10){ testIndex = (testIndex+1) % cycleTest.length; } // after 10AM show next test
+  const test = cycleTest[testIndex];
   const testCard = document.getElementById('tomorrowTest');
-  testCard.innerHTML = `<h2>Tomorrow's Cycle Test</h2>
+  testCard.innerHTML = `<h2>Upcoming Cycle Test</h2>
                         <div class="period-slot"><span>${test.date} (${test.day})</span><span>${test.subject}</span></div>`;
 }
 
