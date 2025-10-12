@@ -185,27 +185,125 @@
 
   <!-- Class Routine Table -->
   <div class="table-container" id="classRoutine">
-    <!-- ... (tables remain unchanged) ... -->
+    <table>
+      <tr>
+        <th>Day\Time</th>
+        <th>6:05–6:55</th>
+        <th>6:55–7:45</th>
+        <th>7:45–8:35</th>
+        <th>8:35–9:25</th>
+        <th>9:45–10:35</th>
+        <th>10:35–11:25</th>
+      </tr>
+      <tr>
+        <td>Sun</td>
+        <td>Math<sub>AP</sub></td>
+        <td>Chem<sub>KP</sub></td>
+        <td>Comp<sub>LPP</sub></td>
+        <td>Chem<sub>TP</sub></td>
+        <td>Chem<sub>KBP</sub></td>
+        <td>----</td>
+      </tr>
+      <tr>
+        <td>Mon</td>
+        <td>Nepali<sub>NSM</sub></td>
+        <td>Physics<sub>SKS</sub></td>
+        <td>Nepali<sub>URT</sub></td>
+        <td>Math<sub>AP</sub></td>
+        <td>Chem<sub>NK</sub></td>
+        <td>----</td>
+      </tr>
+      <tr>
+        <td>Tue</td>
+        <td>Math<sub>YP</sub></td>
+        <td>Nepali<sub>URT</sub></td>
+        <td>Physics<sub>UKD</sub></td>
+        <td>Math<sub>BPP</sub></td>
+        <td>Chem<sub>KBP</sub></td>
+        <td>Physics<sub>HMA</sub></td>
+      </tr>
+      <tr>
+        <td>Wed</td>
+        <td>English<sub>RL</sub></td>
+        <td>Math<sub>YP</sub></td>
+        <td>Comp<sub>LPP</sub></td>
+        <td>Physics<sub>UKD</sub></td>
+        <td>English <sub>CS</sub></td>
+        <td>Chem <sub>SBS</sub></td>
+      </tr>
+      <tr>
+        <td>Thu</td>
+        <td>Math <sub>AP</sub></td>
+        <td>Physics <sub>SKS</sub></td>
+        <td>Math <sub>YP</sub></td>
+        <td>Comp <sub>LPP</sub></td>
+        <td>Chem <sub>TP</sub></td>
+        <td>English <sub>CS</sub></td>
+      </tr>
+      <tr>
+        <td>Fri</td>
+        <td>Physics <sub>HMA</sub></td>
+        <td>Physics <sub>SKS</sub></td>
+        <td>Nepali <sub>URT</sub></td>
+        <td>Comp <sub>LPP</sub></td>
+        <td>Chem/Physics Lab</td>
+        <td>English <sub>CS</sub></td>
+      </tr>
+    </table>
   </div>
 
+  <!-- Cycle Test Routine Table -->
   <div class="table-container hidden" id="cycleRoutine">
-    <!-- ... (tables remain unchanged) ... -->
+    <table>
+      <tr>
+        <th>Date</th>
+        <th>Day</th>
+        <th>Subject</th>
+      </tr>
+      <tr><td>2082/06/27</td><td>Mon</td><td>Computer Science</td></tr>
+      <tr><td>2082/06/28</td><td>Tue</td><td>Mathematics</td></tr>
+      <tr><td>2082/06/29</td><td>Wed</td><td>Physics</td></tr>
+      <tr><td>2082/06/30</td><td>Thu</td><td>Chemistry</td></tr>
+      <tr><td>2082/07/01</td><td>Sat</td><td>Nepali</td></tr>
+      <tr><td>2082/07/01</td><td>Sun</td><td>English</td></tr>
+    </table>
   </div>
 
+  <!-- Syllabus / Grade Section -->
   <div id="syllabusSection" class="hidden">
     <div class="subject-btns">
       <button id="physicsBtn">Physics</button>
       <button id="chemistryBtn">Chemistry</button>
       <button id="computerBtn">Computer</button>
     </div>
+
     <div class="table-container hidden" id="physicsTable">
-      <!-- ... -->
+      <table>
+        <tr><th>Physics Topics</th></tr>
+        <tr><td>1. Vectors</td></tr>
+        <tr><td>2. Reflection</td></tr>
+        <tr><td>3. Thermal Expansion</td></tr>
+        <tr><td>4. Thermal Expansion (continued)</td></tr>
+      </table>
     </div>
+
     <div class="table-container hidden" id="chemistryTable">
-      <!-- ... -->
+      <table>
+        <tr><th>Chemistry Topics</th></tr>
+        <tr><td>1. Stoichiometry</td></tr>
+        <tr><td>2. Chemical Equilibrium</td></tr>
+        <tr><td>3. Metallurgy</td></tr>
+        <tr><td>4. Organic Chemistry</td></tr>
+      </table>
     </div>
+
     <div class="table-container hidden" id="computerTable">
-      <!-- ... -->
+      <table>
+        <tr><th>Computer Topics</th></tr>
+        <tr><td>1. Multimedia</td></tr>
+        <tr><td>2. Programming Concepts and Logic</td></tr>
+        <tr><td>3. Flowcharts</td></tr>
+      </table>
     </div>
   </div>
 
@@ -215,6 +313,7 @@
   <div class="flying" id="fly3">L2</div>
 
   <script>
+    // Buttons & Sections
     const classBtn = document.getElementById('classBtn');
     const cycleBtn = document.getElementById('cycleBtn');
     const syllabusBtn = document.getElementById('syllabusBtn');
@@ -253,18 +352,17 @@
       computerTable.classList.add('hidden');
     });
 
+    // Subject buttons
     physicsBtn.addEventListener('click', () => {
       physicsTable.classList.remove('hidden');
       chemistryTable.classList.add('hidden');
       computerTable.classList.add('hidden');
     });
-
     chemistryBtn.addEventListener('click', () => {
       chemistryTable.classList.remove('hidden');
       physicsTable.classList.add('hidden');
       computerTable.classList.add('hidden');
     });
-
     computerBtn.addEventListener('click', () => {
       computerTable.classList.remove('hidden');
       physicsTable.classList.add('hidden');
@@ -308,5 +406,6 @@
       setTimeout(() => dot.remove(), 500);
     });
   </script>
+
 </body>
 </html>
