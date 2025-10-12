@@ -2,153 +2,36 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Syllabus / Grade</title>
+<title>Cycle Test Routine</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-body {
-  font-family:'Poppins',sans-serif;
-  margin:0;
-  background:#1e1e2f;
-  color:#ddd;
-  text-align:center;
-  overflow-x:hidden;
-}
-body::before {
-  content:"AKMAL";
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) rotate(-20deg);
-  font-size:8rem;
-  color:rgba(255,255,255,0.15);
-  pointer-events:none;
-  z-index:0;
-}
-h1 {
-  margin:30px 0 10px;
-  color:#fff;
-}
-.btn-back {
-  display:inline-block;
-  margin:15px;
-  padding:10px 20px;
-  background:#1d4ed8;
-  color:#fff;
-  border-radius:8px;
-  text-decoration:none;
-  transition:0.3s;
-}
-.btn-back:hover { background:#2563eb; }
-
-.subject-btns {
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:12px;
-  margin:20px 0;
-}
-.subject-btns button {
-  flex:1 1 150px;
-  max-width:200px;
-  background:#4c1d95;
-  color:#fff;
-  border:none;
-  padding:12px 20px;
-  font-size:1rem;
-  border-radius:8px;
-  cursor:pointer;
-  transition:0.3s;
-}
-.subject-btns button:hover { background:#6d28d9; }
-
-#syllabusContent {
-  max-width:600px;
-  margin:15px auto 50px;
-  background:rgba(42,42,61,0.85);
-  border-radius:10px;
-  padding:20px;
-  text-align:left;
-  color:#fff;
-}
-.period-slot {margin:5px 0;}
-
-.flying{position:absolute;font-size:0.8rem;color:rgba(255,255,255,0.3);z-index:2;pointer-events:none;}
-
-@media(max-width:768px){
-  .subject-btns button{flex:1 1 120px; max-width:150px; font-size:0.9rem; padding:10px 18px;}
-  .flying{font-size:0.6rem;}
-}
-@media(max-width:480px){
-  .subject-btns button{flex:1 1 90px; max-width:120px; font-size:0.8rem; padding:8px 12px;}
-  .flying{font-size:0.5rem;}
-}
+body{font-family:'Poppins',sans-serif;margin:0;background:#1e1e2f;color:#ddd;text-align:center;}
+h1{margin:20px 0;}
+table{margin:0 auto 50px;border-collapse:collapse;width:90%;max-width:600px;}
+th,td{padding:12px;border:1px solid rgba(255,255,255,0.1);color:#fff;}
+th{background:#2e0854;}
+tr:nth-child(even){background:rgba(36,36,54,0.65);}
+tr:nth-child(odd){background:rgba(46,46,66,0.65);}
+a{color:#1d4ed8;text-decoration:none;margin:15px;display:inline-block;}
+a:hover{color:#2563eb;}
 </style>
 </head>
 <body>
 
-<h1>Syllabus / Grade</h1>
-<a class="btn-back" href="index.html">← Back</a>
-
-<div class="subject-btns">
-  <button onclick="showSyllabus('Physics')">Physics</button>
-  <button onclick="showSyllabus('Chemistry')">Chemistry</button>
-  <button onclick="showSyllabus('Computer')">Computer</button>
-</div>
-
-<div id="syllabusContent">Click a subject to see the syllabus.</div>
-
-<div class="flying" id="fly1">L2</div>
-<div class="flying" id="fly2">L2</div>
-<div class="flying" id="fly3">L2</div>
-
 <script>
-const syllabus = {
-  'Physics': [
-    'Vector',
-    'Reflection',
-    'Thermal Expansion'
-  ],
-  'Chemistry': [
-    'Stoichiometry',
-    'Chemical Equilibrium',
-    'Metallurgy',
-    'Organic Chemistry (Half)'
-  ],
-  'Computer': [
-    'Multimedia',
-    'Programming Concept',
-    'Programming Logic',
-    'Flowchart'
-  ]
-};
-
-function showSyllabus(subject){
-  const container = document.getElementById('syllabusContent');
-  container.innerHTML = `<h2>${subject} Syllabus</h2>` +
-    syllabus[subject].map(item => `<div class="period-slot">• ${item}</div>`).join('');
-}
-
-// Flying L2 animation
-const flies=[document.getElementById('fly1'),document.getElementById('fly2'),document.getElementById('fly3')];
-flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});
-setInterval(()=>{flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});},2000);
-
-// Click effect
-document.body.addEventListener('click',e=>{
-  const el=document.createElement('div');
-  el.className='click-effect';
-  el.style.top=e.clientY+'px';
-  el.style.left=e.clientX+'px';
-  el.style.width='20px'; el.style.height='20px'; el.style.background='#fff'; el.style.borderRadius='50%';
-  el.style.position='absolute'; el.style.transform='translate(-50%,-50%)'; el.style.pointerEvents='none';
-  el.style.zIndex='3'; el.style.animation='fadeOut 0.5s forwards';
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(),500);
-});
+if(sessionStorage.getItem('accessGranted')!=='true'){ window.location.href='index.html'; }
 </script>
 
-<style>@keyframes fadeOut{to{opacity:0;transform:translate(-50%,-50%) scale(2);}}</style>
+<h1>Cycle Test Routine</h1>
+<a href="index.html">← Back</a>
+
+<table>
+<tr><th>Date</th><th>Day</th><th>Subject</th></tr>
+<tr><td>12-Oct</td><td>Sunday</td><td>Math / Physics</td></tr>
+<tr><td>13-Oct</td><td>Monday</td><td>English / Chemistry</td></tr>
+<tr><td>14-Oct</td><td>Tuesday</td><td>Computer / Logic</td></tr>
+</table>
 
 </body>
 </html>
