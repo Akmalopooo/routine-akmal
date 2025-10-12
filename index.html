@@ -3,26 +3,115 @@
 <head>
 <meta charset="UTF-8">
 <title>L2 🐴</title>
+<link rel="icon" href="assets/image.png" type="image/png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="icon" href="assets/image.png" type="image/png">
-
 <style>
-body{font-family:'Poppins',sans-serif;margin:0;padding:0;background:#1e1e2f;color:#ddd;text-align:center;overflow-x:hidden;}
-body::before{content:"AKMAL";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:8rem;color:rgba(255,255,255,0.15);pointer-events:none;z-index:0;}
-h1{margin:30px 0 10px;color:#fff;}
-.btn-container{margin:20px 0;display:flex;justify-content:center;flex-wrap:wrap;gap:15px;}
-button{background:#4c1d95;color:#fff;border:none;padding:12px 25px;font-size:1rem;cursor:pointer;border-radius:8px;transition:0.3s;flex:1 1 150px;max-width:200px;}
-button:hover{background:#6d28d9;}
-.routine-card{background:rgba(42,42,61,0.85);padding:15px;border-radius:10px;max-width:400px;margin:15px auto;}
-.routine-card h2{margin-bottom:10px;color:#fff;}
-.period-slot{display:flex;justify-content:space-between;margin:3px 0;font-size:0.9rem;}
-.flying{position:absolute;font-size:0.8rem;color:rgba(255,255,255,0.3);z-index:2;pointer-events:none;}
+/* Loader */
+#loader {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  z-index: 9999;
+}
+#progress {
+  width: 0%;
+  height: 100%;
+  background: #fff;
+  animation: load 2s linear forwards;
+}
+@keyframes load {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+/* Page styling */
+body {
+  font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+  background:#1e1e2f;
+  color:#ddd;
+  text-align:center;
+  overflow-x:hidden;
+}
+body::before {
+  content:"AKMAL";
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) rotate(-20deg);
+  font-size:8rem;
+  color:rgba(255,255,255,0.15);
+  pointer-events:none;
+  z-index:0;
+}
+h1 {margin:30px 0 10px;color:#fff;}
+.btn-container {
+  margin:20px 0;
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:15px;
+}
+button {
+  background:#4c1d95;
+  color:#fff;
+  border:none;
+  padding:12px 25px;
+  font-size:1rem;
+  cursor:pointer;
+  border-radius:8px;
+  transition:0.3s;
+  flex:1 1 150px;
+  max-width:200px;
+}
+button:hover {background:#6d28d9;}
+.routine-card {
+  background:rgba(42,42,61,0.85);
+  padding:15px;
+  border-radius:10px;
+  max-width:400px;
+  margin:15px auto;
+}
+.routine-card h2 {margin-bottom:10px;color:#fff;}
+.period-slot {
+  display:flex;
+  justify-content:space-between;
+  margin:3px 0;
+  font-size:0.9rem;
+}
+.flying {
+  position:absolute;
+  font-size:0.8rem;
+  color:rgba(255,255,255,0.3);
+  z-index:2;
+  pointer-events:none;
+}
 @media(max-width:768px){.routine-card{width:90%;}.flying{font-size:0.6rem;}}
 @media(max-width:480px){.flying{font-size:0.5rem;}}
+@keyframes fadeOut{to{opacity:0;transform:translate(-50%,-50%) scale(2);}}
+.click-effect {
+  position:absolute;
+  width:20px;
+  height:20px;
+  background:#fff;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:3;
+  animation:fadeOut 0.5s forwards;
+}
 </style>
 </head>
 <body>
+
+<!-- Loader -->
+<div id="loader">
+  <div id="progress"></div>
+</div>
 
 <h1>L2</h1>
 
@@ -34,8 +123,6 @@ button:hover{background:#6d28d9;}
 
 <!-- Today/Tomorrow Routine Preview -->
 <div class="routine-card" id="todayRoutine"></div>
-
-<!-- Tomorrow's Cycle Test -->
 <div class="routine-card" id="tomorrowTest"></div>
 
 <!-- Flying L2 -->
@@ -44,6 +131,9 @@ button:hover{background:#6d28d9;}
 <div class="flying" id="fly3">L2</div>
 
 <script>
+// Hide loader after 2s
+setTimeout(()=>{document.getElementById('loader').style.display='none';},2000);
+
 // Class Routine Data
 const routineData = {
   'Sunday':[["6:05–6:55","Math AP"], ["6:55–7:45","Chem KP"], ["7:45–8:35","Comp LPP"], ["8:35–9:25","Chem TP"], ["9:45–10:35","Chem KBP"], ["10:35–11:25","----"]],
@@ -56,11 +146,15 @@ const routineData = {
 };
 const dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 
-// Cycle Test Data
+// Cycle Test Data (Updated BS dates)
 const cycleTest = [
-  {date:'12-Oct', day:'Sunday', subject:'Math / Physics'},
-  {date:'13-Oct', day:'Monday', subject:'English / Chemistry'},
-  {date:'14-Oct', day:'Tuesday', subject:'Computer / Logic'}
+  {date:'2082/06/27', day:'Monday', subject:'Computer'},
+  {date:'2082/06/28', day:'Tuesday', subject:'Math'},
+  {date:'2082/06/29', day:'Wednesday', subject:'Physics'},
+  {date:'2082/06/30', day:'Thursday', subject:'Chemistry'},
+  // Friday skipped
+  {date:'2082/07/01', day:'Saturday', subject:'Nepali'},
+  {date:'2082/07/02', day:'Sunday', subject:'English'}
 ];
 
 // Function to show today's/tomorrow's routine
@@ -86,11 +180,11 @@ function showRoutine(){
     ).join('');
 
   // Tomorrow's cycle test
-  const testDayIndex = (dayIndex+1)%cycleTest.length;
+  const testDayIndex = (dayIndex+1) % cycleTest.length;
   const test = cycleTest[testDayIndex];
   const testCard = document.getElementById('tomorrowTest');
   testCard.innerHTML = `<h2>Tomorrow's Cycle Test</h2>
-                        <div class="period-slot"><span>${test.date}</span><span>${test.subject}</span></div>`;
+                        <div class="period-slot"><span>${test.date} (${test.day})</span><span>${test.subject}</span></div>`;
 }
 
 showRoutine();
@@ -106,15 +200,10 @@ document.body.addEventListener('click', e=>{
   el.className='click-effect';
   el.style.top=e.clientY+'px';
   el.style.left=e.clientX+'px';
-  el.style.width='20px'; el.style.height='20px'; el.style.background='#fff'; el.style.borderRadius='50%';
-  el.style.position='absolute'; el.style.transform='translate(-50%,-50%)'; el.style.pointerEvents='none';
-  el.style.zIndex='3'; el.style.animation='fadeOut 0.5s forwards';
   document.body.appendChild(el);
   setTimeout(()=>el.remove(),500);
 });
 </script>
-<style>@keyframes fadeOut{to{opacity:0;transform:translate(-50%,-50%) scale(2);}}</style>
 
 </body>
 </html>
-
