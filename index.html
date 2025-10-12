@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Login - L2 🐴</title>
+<title>L2 🐴 Menu</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
@@ -11,37 +11,15 @@ body {
   margin:0;
   background:#1e1e2f;
   color:#ddd;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
   text-align:center;
 }
-#loginBox {
-  background: rgba(42,42,61,0.95);
-  padding: 40px 30px;
-  border-radius: 15px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-}
-#loginBox input {
-  padding:12px 20px;
-  font-size:1rem;
-  border-radius:10px;
-  border:2px solid #4c1d95;
-  background: rgba(255,255,255,0.05);
-  color:#fff;
-  text-align:center;
-  outline:none;
-  transition:0.3s;
-}
-#loginBox input:focus {
-  border-color:#6d28d9;
-  box-shadow:0 0 10px #6d28d9;
-}
-#loginBox button {
-  padding:12px 25px;
-  margin-top:15px;
-  font-size:1rem;
+h1{margin:50px 0 20px;color:#fff;}
+.menu-btn{
+  display:block;
+  width:200px;
+  margin:20px auto;
+  padding:15px;
+  font-size:1.1rem;
   border:none;
   border-radius:10px;
   background:#4c1d95;
@@ -49,46 +27,13 @@ body {
   cursor:pointer;
   transition:0.3s;
 }
-#loginBox button:hover{
-  background:#6d28d9;
-  box-shadow:0 0 12px #9d28d9;
-  transform:translateY(-2px);
-}
-.errorMsg { color:#ff5555; margin-top:10px; font-weight:600; }
+.menu-btn:hover{background:#6d28d9;}
 </style>
 </head>
 <body>
-
-<div id="loginBox">
-  <h2>Enter Password</h2>
-  <input type="password" id="passwordInput" placeholder="Password">
-  <button onclick="checkPassword()">Submit</button>
-  <div class="errorMsg" id="errorMsg"></div>
-</div>
-
-<script>
-const correctPassword = '1920';
-const passwordInput = document.getElementById('passwordInput');
-const errorMsg = document.getElementById('errorMsg');
-
-function checkPassword() {
-  if(passwordInput.value.trim() === correctPassword){
-    sessionStorage.setItem('accessGranted','true'); // flag to allow access
-    window.location.href = 'main.html';
-  } else {
-    errorMsg.textContent = 'Incorrect Password!';
-    passwordInput.value = '';
-    passwordInput.focus();
-  }
-}
-
-passwordInput.addEventListener('keydown', function(e){
-  if(e.key==='Enter'){
-    e.preventDefault();
-    checkPassword();
-  }
-});
-</script>
-
+<h1>L2 🐴</h1>
+<button class="menu-btn" onclick="location.href='class-routine.html'">Class Routine</button>
+<button class="menu-btn" onclick="location.href='cycle-routine.html'">Cycle Test Routine</button>
+<button class="menu-btn" onclick="location.href='syllabus.html'">Syllabus / Grade</button>
 </body>
 </html>
