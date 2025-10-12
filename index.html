@@ -120,6 +120,8 @@
       flex: 1 1 120px;
       max-width: 150px;
       background-color: #1d4ed8;
+      padding: 10px 20px; /* Slightly smaller padding than main buttons */
+      font-size: 0.9rem; /* Slightly smaller font */
     }
 
     .subject-btns button:hover {
@@ -153,7 +155,7 @@
       to { opacity: 0; transform: translate(-50%, -50%) scale(2); }
     }
 
-    /* MOBILE RESPONSIVE - Enhanced for flying elements */
+    /* MOBILE RESPONSIVE - Enhanced for flying elements and subject buttons */
     @media (max-width: 768px) {
       th, td { 
         padding: 10px 6px; 
@@ -162,12 +164,31 @@
 
       table { font-size: 0.85em; }
 
-      .btn-container, .subject-btns {
+      .btn-container {
         flex-direction: column;
         gap: 10px;
       }
 
-      button { flex: 1 1 100%; max-width: unset; }
+      .btn-container button { 
+        flex: 1 1 100%; 
+        max-width: unset; 
+      }
+
+      /* Subject buttons on mobile: Keep horizontal layout with wrap, but make smaller to mimic desktop */
+      .subject-btns {
+        flex-direction: row; /* Keep horizontal like desktop */
+        flex-wrap: wrap;
+        gap: 8px; /* Smaller gap */
+        justify-content: center;
+      }
+
+      .subject-btns button {
+        flex: 1 1 80px; /* Smaller flex basis */
+        max-width: 100px; /* Smaller max-width */
+        padding: 8px 15px; /* Reduced padding for compactness */
+        font-size: 0.8rem; /* Smaller font-size to fit better */
+        min-width: 70px; /* Ensure they don't shrink too much */
+      }
 
       /* Flying L2 adjustments for mobile: Even smaller, lower opacity, fewer/slower */
       .flying {
@@ -189,6 +210,15 @@
 
     @media (max-width: 480px) {
       th, td { padding: 8px 4px; font-size: 0.75em; }
+
+      /* Subject buttons even smaller on very small screens */
+      .subject-btns button {
+        flex: 1 1 70px;
+        max-width: 90px;
+        padding: 6px 12px;
+        font-size: 0.75rem;
+        min-width: 60px;
+      }
 
       /* Even more subtle on very small screens */
       .flying {
