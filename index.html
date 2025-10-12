@@ -12,11 +12,12 @@ body {
   background:#1e1e2f;
   color:#ddd;
   text-align:center;
+  overflow:hidden;
 }
 h1{margin:50px 0 20px;color:#fff;}
 .menu-btn{
   display:block;
-  width:200px;
+  width:220px;
   margin:20px auto;
   padding:15px;
   font-size:1.1rem;
@@ -28,6 +29,23 @@ h1{margin:50px 0 20px;color:#fff;}
   transition:0.3s;
 }
 .menu-btn:hover{background:#6d28d9;}
+.flying{
+  position:absolute;
+  font-size:1rem;
+  color:rgba(255,255,255,0.3);
+  z-index:2;
+  pointer-events:none;
+}
+body::before{
+  content:"AKMAL";
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) rotate(-20deg);
+  font-size:8rem;
+  color:rgba(255,255,255,0.15);
+  pointer-events:none;
+}
 </style>
 </head>
 <body>
@@ -35,5 +53,31 @@ h1{margin:50px 0 20px;color:#fff;}
 <button class="menu-btn" onclick="location.href='class-routine.html'">Class Routine</button>
 <button class="menu-btn" onclick="location.href='cycle-routine.html'">Cycle Test Routine</button>
 <button class="menu-btn" onclick="location.href='syllabus.html'">Syllabus / Grade</button>
+
+<div class="flying" id="fly1">L2</div>
+<div class="flying" id="fly2">L2</div>
+<div class="flying" id="fly3">L2</div>
+
+<script>
+// Flying L2 random
+const flies=[document.getElementById('fly1'),document.getElementById('fly2'),document.getElementById('fly3')];
+flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});
+setInterval(()=>{flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});},2000);
+
+// Click effect
+document.body.addEventListener('click', e=>{
+  const el=document.createElement('div');
+  el.style.position='absolute';
+  el.style.width='20px'; el.style.height='20px';
+  el.style.background='#fff'; el.style.borderRadius='50%';
+  el.style.top=e.clientY+'px'; el.style.left=e.clientX+'px';
+  el.style.transform='translate(-50%,-50%)';
+  el.style.pointerEvents='none'; el.style.zIndex='3';
+  el.style.animation='fadeOut 0.5s forwards';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),500);
+});
+</script>
+<style>@keyframes fadeOut{to{opacity:0; transform:translate(-50%,-50%) scale(2);}}</style>
 </body>
 </html>
