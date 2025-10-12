@@ -1,37 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Cycle Test Routine</title>
-  <link rel="icon" href="assets/image.png" type="image/png">
+  <meta charset="UTF-8">
+  <title>Routine</title>
+  <link rel="icon" type="image/png" href="image.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #1e1e2f;
+      margin: 0;
+      padding: 0;
+      color: #ddd;
+      overflow-x: hidden;
+    }
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
-body{font-family:'Poppins',sans-serif;margin:0;background:#1e1e2f;color:#ddd;text-align:center;}
-body::before{content:"AKMAL";position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-20deg);font-size:8rem;color:rgba(255,255,255,0.15);pointer-events:none;z-index:0;}
-h1{margin:30px 0;color:#fff;}
-.btn-back{display:inline-block;margin:15px;padding:10px 20px;background:#1d4ed8;color:#fff;border-radius:8px;text-decoration:none;}
-.btn-back:hover{background:#2563eb;}
-.table-container{width:95%;max-width:600px;margin:20px auto;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;background:rgba(42,42,61,0.85);border-radius:10px;overflow:hidden;}
-th,td{padding:12px;text-align:center;border:1px solid rgba(255,255,255,0.08);}
-th{background:#2e0854;font-weight:600;}
-tr:nth-child(even){background:rgba(36,36,54,0.65);}
-tr:nth-child(odd){background:rgba(46,46,66,0.65);}
-</style>
+    #main-content {
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+      color: #f5f5f5;
+    }
+
+    /* Back button styling */
+    .back-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #4b0082;
+      color: #fff;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      transition: 0.3s;
+      margin-bottom: 20px;
+    }
+    .back-button:hover {
+      background: #6d28d9;
+      transform: scale(1.05);
+    }
+
+    /* Table styling */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      padding: 15px;
+      position: relative;
+    }
+
+    table {
+      width: 100%;
+      min-width: 800px;
+      border-collapse: collapse;
+      background-color: rgba(42, 42, 61, 0.85);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+    }
+
+    th, td {
+      padding: 14px 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      font-size: 0.95em;
+      color: #e0e0e0;
+    }
+
+    th {
+      background: #2e0854;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    td:first-child {
+      background: rgba(42, 42, 61, 0.85);
+      font-weight: 600;
+      color: #e0e0e0;
+    }
+
+    tr:nth-child(even) { background-color: rgba(36, 36, 54, 0.65); }
+    tr:nth-child(odd) { background-color: rgba(46, 46, 66, 0.65); }
+
+    /* MOBILE FIXES */
+    @media (max-width: 768px) {
+      table { min-width: unset; width: 100%; font-size: 0.8em; }
+      th, td { padding: 10px 6px; word-break: break-word; }
+      td sub { display: block; font-size: 0.75em; margin-top: 4px; color: #bbb; }
+    }
+  </style>
 </head>
 <body>
-<h1>Cycle Test Routine</h1>
-<a class="btn-back" href="index.html">← Back</a>
+  <!-- Main Content -->
+  <div id="main-content">
+    <!-- Back Button -->
+    <div style="text-align:center;">
+      <a href="index.html" class="back-button">⬅ Back</a>
+    </div>
 
-<div class="table-container">
-  <table>
-    <tr><th>Date</th><th>Day</th><th>Subject</th></tr>
-    <tr><td>12-Oct</td><td>Sunday</td><td>Math / Physics</td></tr>
-    <tr><td>13-Oct</td><td>Monday</td><td>English / Chemistry</td></tr>
-    <tr><td>14-Oct</td><td>Tuesday</td><td>Computer / Logic</td></tr>
-  </table>
-</div>
+    <h1>Routine</h1>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>Day\Time</th>
+          <th>6:05–6:55</th>
+          <th>6:55–7:45</th>
+          <th>7:45–8:35</th>
+          <th>8:35–9:25</th>
+          <th>9:45–10:35</th>
+          <th>10:35–11:25</th>
+        </tr>
+        <tr>
+          <td>Sun</td>
+          <td>Math<sub>AP</sub></td>
+          <td>Chem<sub>KP</sub></td>
+          <td>Comp<sub>LPP</sub></td>
+          <td>Chem<sub>TP</sub></td>
+          <td>Chem<sub>KBP</sub></td>
+          <td>----</td>
+        </tr>
+        <tr>
+          <td>Mon</td>
+          <td>Nepali<sub>NSM</sub></td>
+          <td>Physics<sub>SKS</sub></td>
+          <td>Nepali<sub>URT</sub></td>
+          <td>Math<sub>AP</sub></td>
+          <td>Chem<sub>NK</sub></td>
+          <td>----</td>
+        </tr>
+        <tr>
+          <td>Tue</td>
+          <td>Math<sub>YP</sub></td>
+          <td>Nepali<sub>URT</sub></td>
+          <td>Physics<sub>UKD</sub></td>
+          <td>Math<sub>BPP</sub></td>
+          <td>Chem<sub>KBP</sub></td>
+          <td>Physics<sub>HMA</sub></td>
+        </tr>
+        <tr>
+          <td>Wed</td>
+          <td>English<sub>RL</sub></td>
+          <td>Math<sub>YP</sub></td>
+          <td>Comp<sub>LPP</sub></td>
+          <td>Physics<sub>UKD</sub></td>
+          <td>English <sub>CS</sub></td>
+          <td>Chem <sub>SBS</sub></td>
+        </tr>
+        <tr>
+          <td>Thu</td>
+          <td>Math <sub>AP</sub></td>
+          <td>Physics <sub>SKS</sub></td>
+          <td>Math <sub>YP</sub></td>
+          <td>Comp <sub>LPP</sub></td>
+          <td>Chem <sub>TP</sub></td>
+          <td>English <sub>CS</sub></td>
+        </tr>
+        <tr>
+          <td>Fri</td>
+          <td>Physics <sub>HMA</sub></td>
+          <td>Physics <sub>SKS</sub></td>
+          <td>Nepali <sub>URT</sub></td>
+          <td>Comp <sub>LPP</sub></td>
+          <td>Chem/Physics Lab</td>
+          <td>English <sub>CS</sub></td>
+        </tr>
+      </table>
+    </div>
+  </div>
 </body>
 </html>
