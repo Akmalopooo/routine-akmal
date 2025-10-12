@@ -12,12 +12,13 @@ body {
   background:#1e1e2f;
   color:#ddd;
   text-align:center;
+  overflow-x:hidden;
 }
-h1{margin:50px 0 20px;color:#fff;}
+h1{margin:30px 0 10px;color:#fff;}
 .menu-btn{
   display:block;
-  width:200px;
-  margin:20px auto;
+  width:220px;
+  margin:15px auto;
   padding:15px;
   font-size:1.1rem;
   border:none;
@@ -28,12 +29,107 @@ h1{margin:50px 0 20px;color:#fff;}
   transition:0.3s;
 }
 .menu-btn:hover{background:#6d28d9;}
+.class-routine-preview{
+  margin:20px auto 50px;
+  max-width:600px;
+  background:rgba(42,42,61,0.85);
+  padding:15px;
+  border-radius:10px;
+}
+.day-header{font-weight:600;margin-bottom:8px;font-size:1.1rem;}
+.period-slot{display:flex;justify-content:space-between;margin:3px 0;}
+.time-slot{font-size:0.85rem;}
+.subject-slot{font-size:0.85rem;}
+.flying{position:absolute;font-size:0.8rem;color:rgba(255,255,255,0.3);z-index:2;pointer-events:none;}
+body::before{
+  content:"AKMAL";
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) rotate(-20deg);
+  font-size:8rem;
+  color:rgba(255,255,255,0.15);
+  pointer-events:none;
+}
+@media(max-width:768px){.class-routine-preview{width:90%;}.flying{font-size:0.6rem;}}
+@media(max-width:480px){.flying{font-size:0.5rem;}}
 </style>
 </head>
 <body>
 <h1>L2 🐴</h1>
-<button class="menu-btn" onclick="location.href='class-routine.html'">Class Routine</button>
+
+<!-- Main Buttons -->
+<button class="menu-btn" onclick="location.href='class-routine.html'">Full Class Routine</button>
 <button class="menu-btn" onclick="location.href='cycle-routine.html'">Cycle Test Routine</button>
 <button class="menu-btn" onclick="location.href='syllabus.html'">Syllabus / Grade</button>
+
+<!-- Routine Preview -->
+<div class="class-routine-preview" id="routinePreview">
+  <div class="day-header" id="routineDay">Today's Routine</div>
+  <div id="periods"></div>
+</div>
+
+<div class="flying" id="fly1">L2</div>
+<div class="flying" id="fly2">L2</div>
+<div class="flying" id="fly3">L2</div>
+
+<script>
+// Class Routine Data
+const routineData = {
+  'Sunday':[["6:05–6:55","Math AP"],["6:55–7:45","Chem KP"],["7:45–8:35","Comp LPP"]],
+  'Monday':[["6:05–6:55","Nepali NSM"],["6:55–7:45","Physics SKS"],["7:45–8:35","Nepali URT"],["8:35–9:25","Math AP"],["9:45–10:35","Chem NK"],["10:35–11:25","----"]],
+  'Tuesday':[["6:05–6:55","Math YP"],["6:55–7:45","Nepali URT"],["7:45–8:35","Physics UKD"],["8:35–9:25","Math BPP"],["9:45–10:35","Chem KBP"],["10:35–11:25","Physics HMA"]],
+  'Wednesday':[["6:05–6:55","English RL"],["6:55–7:45","Math YP"],["7:45–8:35","Comp LPP"],["8:35–9:25","Physics UKD"],["9:45–10:35","English CS"],["10:35–11:25","Chem SBS"]],
+  'Thursday':[["6:05–6:55","Math AP"],["6:55–7:45","Physics SKS"],["7:45–8:35","Math YP"],["8:35–9:25","Comp LPP"],["9:45–10:35","Chem TP"],["10:35–11:25","English CS"]],
+  'Friday':[["6:05–6:55","Physics HMA"],["6:55–7:45","Physics SKS"],["7:45–8:35","Nepali URT"],["8:35–9:25","Comp LPP"],["9:45–10:35","Chem/Physics Lab"],["10:35–11:25","English CS"]],
+  'Saturday':[["----","----"]]
+};
+
+// Determine Nepal Time and Day
+function getNepalRoutine(){
+  const now = new Date();
+  const utcOffset = now.getTimezoneOffset(); // in minutes
+  const nepalOffset = 5*60 + 45;
+  let totalMinutes = now.getHours()*60 + now.getMinutes() + (nepalOffset + utcOffset);
+  let nepalHour = Math.floor(totalMinutes/60);
+  if(nepalHour>=24) nepalHour -= 24;
+  let dayIndex = now.getDay(); // 0=Sunday
+  if(nepalHour>=10) dayIndex = (dayIndex+1)%7; // After 10am show next day
+  const dayNames=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const dayName = dayNames[dayIndex];
+  document.getElementById('routineDay').textContent = dayName + " Routine";
+  const periodsDiv = document.getElementById('periods');
+  periodsDiv.innerHTML="";
+  routineData[dayName].forEach(slot=>{
+    const div = document.createElement('div');
+    div.className="period-slot";
+    div.innerHTML=`<span class="time-slot">${slot[0]}</span><span class="subject-slot">${slot[1]}</span>`;
+    periodsDiv.appendChild(div);
+  });
+}
+
+getNepalRoutine();
+
+// Flying L2
+const flies=[document.getElementById('fly1'),document.getElementById('fly2'),document.getElementById('fly3')];
+flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});
+setInterval(()=>{flies.forEach(f=>{f.style.top=Math.random()*90+'vh'; f.style.left=Math.random()*90+'vw';});},2000);
+
+// Click effect
+document.body.addEventListener('click', e=>{
+  const el=document.createElement('div');
+  el.className='click-effect';
+  el.style.top=e.clientY+'px';
+  el.style.left=e.clientX+'px';
+  el.style.width='20px'; el.style.height='20px';
+  el.style.background='#fff'; el.style.borderRadius='50%';
+  el.style.position='absolute'; el.style.transform='translate(-50%,-50%)';
+  el.style.pointerEvents='none'; el.style.zIndex='3';
+  el.style.animation='fadeOut 0.5s forwards';
+  document.body.appendChild(el);
+  setTimeout(()=>el.remove(),500);
+});
+</script>
+<style>@keyframes fadeOut{to{opacity:0; transform:translate(-50%,-50%) scale(2);}}</style>
 </body>
 </html>
