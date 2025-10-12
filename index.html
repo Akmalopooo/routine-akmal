@@ -2,71 +2,28 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>L2 🐴</title>
+<title>Login - L2 🐴</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* Basic page */
 body {
   font-family:'Poppins',sans-serif;
   margin:0;
   background:#1e1e2f;
   color:#ddd;
-  text-align:center;
-  overflow-x:hidden;
-}
-body::before {
-  content:"AKMAL";
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%) rotate(-20deg);
-  font-size:8rem;
-  color:rgba(255,255,255,0.15);
-  pointer-events:none;
-  z-index:0;
-}
-h1 { margin:30px 0; color:#fff; }
-
-/* Main buttons */
-.btn-container{
   display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:15px;
-  margin:20px 0;
-}
-.btn-container button{
-  background:#4c1d95;
-  color:#fff;
-  border:none;
-  padding:12px 25px;
-  font-size:1rem;
-  cursor:pointer;
-  border-radius:8px;
-  transition:0.3s;
-  flex:1 1 150px;
-  max-width:200px;
-}
-.btn-container button:hover{
-  background:#6d28d9;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0,0,0,0.4);
-}
-
-/* Password screen */
-#passwordScreen {
-  position: fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: rgba(30,30,47,0.95);
-  display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
-  z-index:10;
+  height:100vh;
+  text-align:center;
 }
-#passwordScreen input {
+#loginBox {
+  background: rgba(42,42,61,0.95);
+  padding: 40px 30px;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+}
+#loginBox input {
   padding:12px 20px;
   font-size:1rem;
   border-radius:10px;
@@ -77,85 +34,56 @@ h1 { margin:30px 0; color:#fff; }
   outline:none;
   transition:0.3s;
 }
-#passwordScreen input:focus {
+#loginBox input:focus {
   border-color:#6d28d9;
   box-shadow:0 0 10px #6d28d9;
-  background: rgba(255,255,255,0.1);
-  animation: glow 1.2s infinite alternate;
 }
-#passwordScreen button {
+#loginBox button {
   padding:12px 25px;
+  margin-top:15px;
   font-size:1rem;
   border:none;
   border-radius:10px;
   background:#4c1d95;
   color:#fff;
   cursor:pointer;
-  margin-top:12px;
   transition:0.3s;
-  box-shadow:0 4px 8px rgba(0,0,0,0.3);
 }
-#passwordScreen button:hover {
+#loginBox button:hover{
   background:#6d28d9;
-  box-shadow:0 6px 12px rgba(0,0,0,0.4);
-  transform: translateY(-2px);
-  animation: glow 1.2s infinite alternate;
-}
-@keyframes glow {
-  0% { box-shadow:0 0 5px #6d28d9; }
-  50% { box-shadow:0 0 20px #9d4edd; }
-  100% { box-shadow:0 0 5px #6d28d9; }
+  box-shadow:0 0 12px #9d28d9;
+  transform:translateY(-2px);
 }
 .errorMsg { color:#ff5555; margin-top:10px; font-weight:600; }
-
-.hidden { display:none; }
 </style>
 </head>
 <body>
 
-<!-- Password Screen -->
-<div id="passwordScreen">
-  <h1>Enter Password</h1>
+<div id="loginBox">
+  <h2>Enter Password</h2>
   <input type="password" id="passwordInput" placeholder="Password">
   <button onclick="checkPassword()">Submit</button>
   <div class="errorMsg" id="errorMsg"></div>
 </div>
 
-<!-- Main Menu -->
-<div id="mainContent" class="hidden">
-  <h1>L2</h1>
-  <div class="btn-container">
-    <button onclick="location.href='class-routine.html'">Class Routine</button>
-    <button onclick="location.href='cycle-test.html'">Cycle Test Routine</button>
-    <button onclick="location.href='syllabus.html'">Syllabus / Grade</button>
-  </div>
-</div>
-
 <script>
 const correctPassword = '1920';
-const passwordScreen = document.getElementById('passwordScreen');
-const mainContent = document.getElementById('mainContent');
-const errorMsg = document.getElementById('errorMsg');
 const passwordInput = document.getElementById('passwordInput');
+const errorMsg = document.getElementById('errorMsg');
 
-// Check password function
 function checkPassword() {
-  const userPass = passwordInput.value.trim();
-  if(userPass === correctPassword){
-    sessionStorage.setItem('accessGranted','true'); // access flag
-    passwordScreen.classList.add('hidden');
-    mainContent.classList.remove('hidden');
-    errorMsg.textContent = '';
+  if(passwordInput.value.trim() === correctPassword){
+    sessionStorage.setItem('accessGranted','true'); // flag to allow access
+    window.location.href = 'main.html';
   } else {
-    errorMsg.textContent = "Incorrect Password!";
+    errorMsg.textContent = 'Incorrect Password!';
     passwordInput.value = '';
     passwordInput.focus();
   }
 }
 
-// Allow Enter key to submit
 passwordInput.addEventListener('keydown', function(e){
-  if(e.key === 'Enter'){
+  if(e.key==='Enter'){
     e.preventDefault();
     checkPassword();
   }
